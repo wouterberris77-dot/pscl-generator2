@@ -4,155 +4,123 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Ottimo — Generatore PSCL</title>
-
 <style>
-:root{
-  --sidebar:#1a1f2e;--sidebar-hover:#252d42;--sidebar-active:#2563eb;
-  --blue:#2563eb;--blue-light:#eff6ff;--blue-dark:#1d4ed8;
-  --teal:#00b4a0;--orange:#f07010;--green:#16a34a;--green-light:#f0fdf4;
-  --bg:#f3f4f8;--card:#fff;--border:#e5e7eb;
-  --text:#111827;--muted:#6b7280;--font:'Segoe UI',Arial,sans-serif;
-}
+:root{--blue:#2563eb;--dark:#0f172a;--orange:#f07010;--green:#16a34a;--teal:#00b4a0;--gray:#f8fafc;--border:#e5e7eb;--muted:#6b7280;--font:'Segoe UI',Arial,sans-serif}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--font);background:var(--bg);color:var(--text);display:flex;min-height:100vh}
-
-/* SIDEBAR */
-.sidebar{width:220px;background:var(--sidebar);color:#fff;display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;z-index:100;overflow-y:auto}
-.sidebar-logo{padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08)}
-.logo-icon{background:var(--blue);border-radius:8px;width:32px;height:32px;display:flex;align-items:center;justify-content:center}
-.logo-icon svg{width:18px;height:18px;fill:#fff}
-.logo-text{font-weight:800;font-size:17px;color:#fff}
-.sidebar-section{padding:14px 12px 4px;font-size:10px;font-weight:700;color:rgba(255,255,255,.35);letter-spacing:1px;text-transform:uppercase}
-.sidebar-item{display:flex;align-items:center;gap:10px;padding:9px 16px;font-size:13px;color:rgba(255,255,255,.7);cursor:pointer;border-radius:6px;margin:1px 8px;transition:.15s}
-.sidebar-item:hover{background:var(--sidebar-hover);color:#fff}
-.sidebar-item.active{background:var(--blue);color:#fff;font-weight:600}
-.sidebar-item .dot{width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.5;margin-left:2px}
-
-/* MAIN */
-.main{margin-left:220px;flex:1;display:flex;flex-direction:column;min-height:100vh}
+body{font-family:var(--font);background:#eef2f9;color:#111;display:flex;min-height:100vh}
+.sidebar{width:220px;background:var(--dark);color:#fff;position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:100}
+.slogo{padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:10px}
+.slogo svg{flex-shrink:0}
+.slogo-txt{color:#fff;font-weight:800;font-size:16px}
+.ssec{padding:14px 12px 4px;font-size:10px;font-weight:700;color:rgba(255,255,255,.35);letter-spacing:1px;text-transform:uppercase}
+.sitem{display:flex;align-items:center;gap:8px;padding:9px 16px;font-size:13px;color:rgba(255,255,255,.65);cursor:pointer;border-radius:6px;margin:1px 8px;transition:.15s}
+.sitem:hover{background:rgba(255,255,255,.08);color:#fff}
+.sitem.active{background:var(--blue);color:#fff;font-weight:600}
+.sitem.done{color:rgba(255,255,255,.85)}
+.main{margin-left:220px;flex:1}
 .topbar{background:#fff;border-bottom:1px solid var(--border);padding:0 28px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
-.topbar-title{font-size:15px;font-weight:700;color:var(--text)}
-.topbar-sub{font-size:12px;color:var(--muted)}
-.topbar-right{font-size:13px;color:var(--muted)}
-.content{padding:24px 28px 60px;max-width:900px}
-
-/* CARDS */
-.card{background:var(--card);border-radius:12px;border:1px solid var(--border);padding:24px 28px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
-.card-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:4px}
-.card-sub{font-size:13px;color:var(--muted);margin-bottom:20px}
-.section-badge{display:inline-flex;align-items:center;gap:6px;background:var(--blue-light);color:var(--blue);font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px}
-
-/* FORM FIELDS */
-.fg{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.fg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.topbar-t{font-size:15px;font-weight:700}
+.topbar-s{font-size:13px;color:var(--muted)}
+.content{padding:22px 28px 60px;max-width:900px}
+.card{background:#fff;border-radius:12px;border:1px solid var(--border);padding:24px 28px;margin-bottom:18px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.ctit{font-size:18px;font-weight:700;color:var(--blue);margin-bottom:4px}
+.csub{font-size:13px;color:var(--muted);margin-bottom:20px}
+.sbadge{display:inline-flex;align-items:center;background:#eff6ff;color:var(--blue);font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
 .cf{grid-column:1/-1}
-.fgroup{display:flex;flex-direction:column;gap:5px}
-label.fl{font-weight:600;font-size:13px;color:var(--text)}
-.fh{font-size:11.5px;color:var(--muted)}
-input[type=text],input[type=number],textarea,select{
-  width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;
-  font-size:13px;font-family:var(--font);outline:none;background:#fff;
-  transition:.15s;color:var(--text)
-}
-input:focus,textarea:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+.fg label,.fg3 label,.cf label{display:block;font-weight:600;font-size:13px;margin-bottom:3px}
+.fh{font-size:11px;color:var(--muted);margin-bottom:5px}
+input[type=text],input[type=number],textarea{width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:10px;font-size:13px;font-family:var(--font);outline:none;background:#fff;transition:.15s}
+input:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
 textarea{resize:vertical;min-height:90px}
-
-/* YES/NO */
-.yn{display:flex;gap:8px;margin-top:2px}
-.yn button{padding:8px 22px;border-radius:10px;border:1.5px solid var(--border);background:#fff;font-size:13px;font-weight:600;cursor:pointer;transition:.15s;color:var(--muted)}
-.yn button.ay{background:var(--blue);color:#fff;border-color:var(--blue)}
-.yn button.an{background:#f9fafb;color:var(--text);border-color:var(--border)}
-
-/* CALC BOX */
-.calc-wrap{background:#fefce8;border:1.5px solid #fde047;border-radius:12px;padding:18px 20px;margin-top:8px}
-.calc-title{font-weight:700;color:#854d0e;margin-bottom:6px;font-size:13px}
-.calc-hint{font-size:11.5px;color:#92400e;margin-bottom:14px;line-height:1.6}
-.result-wrap{background:var(--green-light);border:1.5px solid #86efac;border-radius:10px;padding:14px 16px;margin-top:14px}
-.result-title{font-weight:700;color:#15803d;margin-bottom:8px;font-size:13px}
-table.ctable{width:100%;border-collapse:collapse;font-size:12.5px}
-table.ctable th{text-align:left;padding:5px 8px;color:#15803d;font-size:12px;border-bottom:1.5px solid #86efac;font-weight:700}
-table.ctable th.r,table.ctable td.r{text-align:right}
-table.ctable td{padding:5px 8px;border-bottom:1px solid #dcfce7;color:var(--text)}
-table.ctable tr.tot td{font-weight:700;color:#15803d;border-top:2px solid #86efac;border-bottom:none}
-
-/* IMAGE SLOTS */
-.isl{border:2px dashed #c7d2fe;border-radius:12px;background:#f8faff;overflow:hidden;margin-bottom:12px}
-.isl-header{background:#e0e7ff;padding:10px 16px;display:flex;align-items:center;justify-content:space-between}
-.isl-label{font-size:12px;font-weight:700;color:#3730a3}
-.isl-hint{font-size:11px;color:#6366f1}
-.isl-body{padding:16px;display:flex;flex-direction:column;align-items:center;gap:10px}
-.isl-body.has-img{padding:0}
-.isl-body img{width:100%;display:block;max-height:320px;object-fit:contain}
-.isl-btns{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
-.ibtn{padding:8px 18px;border-radius:10px;border:none;font-size:12.5px;font-weight:600;cursor:pointer;transition:.15s}
+.yn{display:flex;gap:8px;margin-top:3px}
+.ynb{padding:7px 22px;border-radius:10px;border:1.5px solid var(--border);background:#fff;font-size:13px;font-weight:600;cursor:pointer;transition:.15s;color:var(--muted)}
+.ynb.ay{background:var(--blue);color:#fff;border-color:var(--blue)}
+.ynb.an{background:#f9fafb;color:#333;border-color:var(--border)}
+.isl{border:2px dashed #c7d2fe;border-radius:10px;background:#f8faff;margin-bottom:12px;overflow:hidden}
+.ish{background:#e0e7ff;padding:9px 14px;display:flex;align-items:center;justify-content:space-between}
+.isl-l{font-size:11.5px;font-weight:700;color:#3730a3}
+.isl-h{font-size:10.5px;color:#6366f1}
+.isb{padding:14px;display:flex;flex-direction:column;align-items:center;gap:9px}
+.isb.hi{padding:0}
+.isb img{width:100%;display:block;max-height:280px;object-fit:contain}
+.ibtns{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.ibtn{padding:7px 16px;border-radius:8px;border:none;font-size:12.5px;font-weight:600;cursor:pointer}
 .ibtn.up{background:var(--blue);color:#fff}
-.ibtn.up:hover{background:var(--blue-dark)}
-.ibtn.paste{background:#fff;color:var(--blue);border:1.5px solid var(--blue)}
-.ibtn.rm{background:#fff;color:#dc2626;border:1.5px solid #fca5a5;font-size:11.5px;padding:5px 12px;margin:8px}
-.isl-note{font-size:11px;color:#818cf8;text-align:center}
-
-/* NAV BUTTONS */
-.nav-btns{display:flex;justify-content:space-between;align-items:center;margin-top:8px;padding-bottom:20px}
-.nbtn{padding:11px 28px;border-radius:10px;border:none;font-size:14px;font-weight:700;cursor:pointer;transition:.15s}
-.nbtn.prev{background:var(--blue-light);color:var(--blue)}
-.nbtn.prev:disabled{background:#f3f4f6;color:#d1d5db;cursor:default}
-.nbtn.next{background:var(--blue);color:#fff}
-.nbtn.next:hover{background:var(--blue-dark)}
-.nbtn.gen{background:var(--green);color:#fff}
-
-/* ===== REPORT ===== */
-#report-view{display:none;padding:24px 28px 60px;max-width:1060px}
-.rw{background:#fff;border-radius:14px;box-shadow:0 4px 24px rgba(0,0,0,.1);overflow:hidden}
-.rcov{background:linear-gradient(135deg,#0f172a 0%,var(--blue-dark) 50%,var(--teal) 100%);color:#fff;padding:48px 56px 40px;display:grid;grid-template-columns:1fr 190px;gap:32px;align-items:center}
-.rbadge{background:rgba(255,255,255,.15);border-radius:6px;padding:4px 12px;font-size:10px;letter-spacing:2px;text-transform:uppercase;display:inline-block;margin-bottom:14px}
-.rcomp{font-size:32px;font-weight:800;line-height:1.2;margin-bottom:8px}
-.rtit{font-size:18px;opacity:.85;margin-bottom:12px}
-.rmeta{font-size:13px;opacity:.7;line-height:2}
-.rlogo-wrap{display:flex;flex-direction:column;align-items:center;gap:10px}
-.rlogo-box{width:160px;height:90px;background:rgba(255,255,255,.12);border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1.5px solid rgba(255,255,255,.2)}
-.rlogo-box img{max-width:150px;max-height:84px;object-fit:contain}
-.rconf-badge{background:rgba(255,255,255,.15);border-radius:6px;padding:6px 14px;font-size:11px;font-weight:700;text-align:center;width:100%}
-.rsh{min-height:68px;display:flex;align-items:center;padding:0 56px;background:linear-gradient(90deg,#0f172a 0%,var(--blue-dark) 60%,var(--teal) 100%);gap:16px}
-.rsh-num{font-size:34px;font-weight:800;color:rgba(255,255,255,.25)}
-.rsh-title{font-size:16px;font-weight:700;color:#fff}
-.rc{padding:30px 56px}
-.rh4{font-size:14px;font-weight:700;color:var(--orange);margin:22px 0 8px;border-left:4px solid var(--orange);padding-left:10px}
-.rp{font-size:13px;line-height:1.85;margin-bottom:12px;color:var(--text)}
+.ibtn.pa{background:#fff;color:var(--blue);border:1.5px solid var(--blue)}
+.ibtn.rm{background:#fff;color:#dc2626;border:1.5px solid #fca5a5;font-size:11px;padding:4px 12px;margin:8px}
+.inote{font-size:11px;color:#818cf8;text-align:center}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.nbtns{display:flex;justify-content:space-between;align-items:center;margin-top:6px;padding-bottom:20px}
+.nb{padding:10px 26px;border-radius:9px;border:none;font-size:14px;font-weight:700;cursor:pointer;transition:.15s}
+.nb.prev{background:#eff6ff;color:var(--blue)}
+.nb.prev:disabled{background:#f3f4f6;color:#d1d5db;cursor:default}
+.nb.next{background:var(--blue);color:#fff}
+.nb.gen{background:var(--green);color:#fff}
+.cbox{background:#fffae8;border:1.5px solid #fde047;border-radius:10px;padding:14px 16px;margin-top:6px}
+.ctit2{font-weight:700;color:#854d0e;margin-bottom:6px;font-size:13px}
+.cpar{font-size:11.5px;color:#92400e;margin-bottom:12px;line-height:1.6}
+.rbox{background:#f0fdf4;border:1.5px solid #86efac;border-radius:10px;padding:12px 14px;margin-top:12px}
+.rtit{font-weight:700;color:#15803d;margin-bottom:7px;font-size:13px}
+table.ct{width:100%;border-collapse:collapse;font-size:12.5px}
+table.ct th{text-align:left;padding:4px 8px;color:#15803d;font-size:12px;border-bottom:1.5px solid #86efac;font-weight:700}
+table.ct th.r,table.ct td.r{text-align:right}
+table.ct td{padding:4px 8px;border-bottom:1px solid #dcfce7}
+table.ct tr.tot td{font-weight:700;color:#15803d;border-top:2px solid #86efac;border-bottom:none}
+#rv{display:none}
+.rw{background:#fff;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,.1);overflow:hidden;max-width:1050px;margin:0 auto}
+.rcov{background:linear-gradient(135deg,#0f172a,#1d4ed8 55%,#00b4a0);color:#fff;padding:46px 52px 38px;display:grid;grid-template-columns:1fr 190px;gap:28px;align-items:center}
+.rbadge{background:rgba(255,255,255,.15);border-radius:5px;padding:3px 12px;font-size:10px;letter-spacing:2px;text-transform:uppercase;display:inline-block;margin-bottom:12px}
+.rcomp{font-size:30px;font-weight:800;margin-bottom:6px;line-height:1.2}
+.rtit2{font-size:17px;opacity:.85;margin-bottom:10px}
+.rmeta{font-size:12.5px;opacity:.7;line-height:1.9}
+.rlogo{background:rgba(255,255,255,.15);border-radius:10px;padding:10px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.rlogo-b{width:160px;height:80px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:6px;background:rgba(255,255,255,.1)}
+.rlogo-b img{max-width:150px;max-height:76px;object-fit:contain}
+.rconf{background:rgba(255,255,255,.15);border-radius:6px;padding:5px 12px;font-size:11px;font-weight:700;text-align:center;color:#fff;width:100%}
+.rsh{min-height:64px;display:flex;align-items:center;padding:0 52px;background:linear-gradient(90deg,#0f172a,#1d4ed8 60%,#00b4a0);gap:14px}
+.rsh-n{font-size:32px;font-weight:800;color:rgba(255,255,255,.25)}
+.rsh-t{font-size:16px;font-weight:700;color:#fff}
+.rc{padding:28px 52px}
+.rh4{font-size:13.5px;font-weight:700;color:var(--orange);margin:20px 0 7px;border-left:4px solid var(--orange);padding-left:9px}
+.rp{font-size:13px;line-height:1.85;margin-bottom:10px}
 .rp strong{color:#1e3a8a}
-.krow{display:flex;gap:14px;margin:16px 0;flex-wrap:wrap}
-.kpi{flex:1;min-width:120px;background:#f8fafc;border-radius:10px;padding:14px 16px;border-left:4px solid var(--blue)}
-.kv{font-size:26px;font-weight:800;color:var(--blue);line-height:1}
-.kl{font-size:11.5px;color:var(--muted);margin-top:4px;line-height:1.4}
+.krow{display:flex;gap:12px;margin:14px 0;flex-wrap:wrap}
+.kpi{flex:1;min-width:110px;background:#f8fafc;border-radius:9px;padding:12px 14px;border-left:4px solid var(--blue)}
+.kv{font-size:24px;font-weight:800;color:var(--blue);line-height:1}
+.kl{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.4}
 .kpi.g{border-color:var(--green)}.kpi.g .kv{color:var(--green)}
 .kpi.o{border-color:var(--orange)}.kpi.o .kv{color:var(--orange)}
 .kpi.r{border-color:#dc2626}.kpi.r .kv{color:#dc2626}
-.etw{background:var(--green-light);border:1.5px solid #86efac;border-radius:12px;padding:16px;margin:14px 0}
-.ett{font-weight:700;color:#15803d;margin-bottom:10px;font-size:13px}
-table.et{width:100%;border-collapse:collapse;font-size:13px}
-table.et th{color:#15803d;padding:6px 10px;border-bottom:1.5px solid #86efac;font-size:12px;text-align:left}
+.etw{background:#f0fdf4;border:1.5px solid #86efac;border-radius:10px;padding:14px;margin:12px 0}
+.ett{font-weight:700;color:#15803d;margin-bottom:8px;font-size:13px}
+table.et{width:100%;border-collapse:collapse;font-size:12.5px}
+table.et th{color:#15803d;padding:5px 10px;border-bottom:1.5px solid #86efac;font-size:12px;text-align:left}
 table.et th.r,table.et td.r{text-align:right}
-table.et td{padding:6px 10px;border-bottom:1px solid #dcfce7}
+table.et td{padding:5px 10px;border-bottom:1px solid #dcfce7}
 table.et tr.tot td{font-weight:700;color:#15803d;border-top:2px solid #86efac;border-bottom:none}
-.en{font-size:11px;color:#4ade80;margin-top:8px}
-table.mt{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0}
-table.mt th{background:var(--blue);color:#fff;padding:8px 12px;text-align:left;font-size:12px}
+.en{font-size:11px;color:#4ade80;margin-top:7px}
+table.mt{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0}
+table.mt th{background:var(--blue);color:#fff;padding:7px 12px;text-align:left;font-size:12px}
 table.mt th.r,table.mt td.r{text-align:right}
-table.mt td{padding:8px 12px;border-bottom:1px solid var(--border)}
+table.mt td{padding:7px 12px;border-bottom:1px solid var(--border)}
 .dn{color:#dc2626;font-weight:700}.up{color:var(--green);font-weight:700}
-.mlist{background:#f8fafc;border-radius:10px;padding:16px 20px;font-size:13px;line-height:2;white-space:pre-wrap;border-left:4px solid var(--blue);margin:10px 0}
-.norm-li{font-size:13px;line-height:2;padding-left:20px}
-.norm-li li{margin-bottom:2px}
-.rfoot{background:#0f172a;color:rgba(255,255,255,.4);padding:16px 56px;font-size:11px;display:flex;justify-content:space-between}
-.ebar{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;background:#fff;border-radius:12px;padding:14px 20px;border:1px solid var(--border)}
-.ebar-title{font-size:16px;font-weight:700;color:var(--blue)}
-.ebtns{display:flex;gap:8px}
-.ebtn{padding:9px 20px;border-radius:9px;border:none;font-size:13px;font-weight:700;cursor:pointer}
-.ebtn.back{background:var(--blue-light);color:var(--blue)}
+.ml{background:#f8fafc;border-radius:9px;padding:14px 18px;font-size:13px;line-height:1.9;white-space:pre-wrap;border-left:4px solid var(--blue);margin:10px 0}
+.nli{font-size:13px;line-height:1.9;padding-left:18px}
+.nli li{margin-bottom:2px}
+.rfoot{background:#0f172a;color:rgba(255,255,255,.4);padding:14px 52px;font-size:11px;display:flex;justify-content:space-between}
+.icap{font-size:12.5px;font-weight:700;color:#1e3a8a;border-left:3px solid var(--blue);padding-left:8px;margin:16px 0 5px}
+.ebar{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:10px;background:#fff;border-radius:11px;padding:12px 18px;border:1px solid var(--border)}
+.ebar-t{font-size:16px;font-weight:700;color:var(--blue)}
+.ebtns{display:flex;gap:8px;flex-wrap:wrap}
+.ebtn{padding:9px 20px;border-radius:8px;border:none;font-size:13px;font-weight:700;cursor:pointer}
+.ebtn.back{background:#eff6ff;color:var(--blue)}
 .ebtn.pdf{background:var(--orange);color:#fff}
-
+.ebtn.word{background:#2b579a;color:#fff}
 @media print{
-  .sidebar,.topbar,.nav-btns,#form-view,.ebar,#progress-area{display:none!important}
-  #report-view{display:block!important;padding:0;max-width:none}
+  .sidebar,.topbar,.nbtns,#fv,.ebar{display:none!important}
+  #rv{display:block!important}
   .rw{box-shadow:none;border-radius:0}
   .rcov,.rsh{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   body{background:#fff}.main{margin-left:0}
@@ -160,759 +128,479 @@ table.mt td{padding:8px 12px;border-bottom:1px solid var(--border)}
 </style>
 </head>
 <body>
-
-<!-- SIDEBAR -->
 <div class="sidebar">
-  <div class="sidebar-logo" style="padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:10px">
-    <svg width="28" height="28" viewBox="0 0 45 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <div class="slogo">
+    <svg width="28" height="28" viewBox="0 0 45 47" fill="none">
       <path fill-rule="evenodd" clip-rule="evenodd" d="M45 32.97L22.458 32.97C17.493 32.97 13.468 28.938 13.468 23.963C13.468 19.001 17.502 14.957 22.479 14.957C27.479 14.957 31.532 19.02 31.532 24.005L31.532 32.97L45 32.97L44.9996 24.005C44.9997 11.544 34.894 1.463 22.479 1.463C10.087 1.463 0 11.525 0 23.963C0 36.39 10.055 46.463 22.458 46.463L45 46.463L45 32.97Z" fill="#0089FF"/>
     </svg>
-    <span style="color:#fff;font-weight:800;font-size:17px;letter-spacing:-.3px">Ottimo</span>
+    <span class="slogo-txt">Ottimo</span>
   </div>
-  <div class="sidebar-section">Generatore PSCL</div>
-  <div id="sidebar-steps"></div>
+  <div class="ssec">Generatore PSCL</div>
+  <div id="sidebar"></div>
 </div>
-
-<!-- MAIN -->
 <div class="main">
   <div class="topbar">
     <div>
-      <div class="topbar-title" id="topbar-title">Generatore PSCL Light</div>
-      <div class="topbar-sub">D.I. 179/2021 — Linee Guida Mobility Management</div>
+      <div class="topbar-t" id="tbar-t">Generatore PSCL Light</div>
+      <div style="font-size:12px;color:var(--muted)">D.I. 179/2021 — Linee Guida Mobility Management</div>
     </div>
-    <div class="topbar-right" id="topbar-step">Passaggio 1 di 9</div>
+    <div class="topbar-s" id="tbar-s">Passaggio 1 di 9</div>
   </div>
-
-  <div class="content" id="form-content">
-    <div id="progress-area"></div>
-    <div id="form-view"></div>
-    <div class="nav-btns" id="nav-btns">
-      <button class="nbtn prev" id="bp" onclick="prevStep()" disabled>← Indietro</button>
-      <button class="nbtn next" id="bn" onclick="nextStep()">Avanti →</button>
+  <div class="content" id="fv-wrap">
+    <div id="fv"></div>
+    <div class="nbtns" id="nbtns">
+      <button class="nb prev" id="bp" onclick="prev()" disabled>← Indietro</button>
+      <button class="nb next" id="bn" onclick="next()">Avanti →</button>
     </div>
   </div>
-
-  <div id="report-view">
+  <div class="content" id="rv" style="max-width:1100px">
     <div class="ebar">
-      <div class="ebar-title">📄 PSCL generato</div>
+      <div class="ebar-t">📄 PSCL generato</div>
       <div class="ebtns">
         <button class="ebtn back" onclick="goTo(STEPS.length-2)">← Modifica</button>
         <button class="ebtn pdf" onclick="window.print()">🖨️ Stampa / PDF</button>
-        <button class="ebtn word" onclick="testDocx()">📝 Scarica Word (.docx)</button>
-        <button class="ebtn back" style="background:#6366f1;color:#fff" onclick="diagTest()">🔧 Test</button>
+        <button class="ebtn word" id="wbtn" onclick="startWord()">📝 Scarica Word</button>
       </div>
     </div>
     <div class="rw" id="rc"></div>
   </div>
 </div>
-
 <input type="file" id="fi" accept="image/*" style="display:none"/>
-
 <script>
-// ── DATA ─────────────────────────────────────────────
-const D={
-  // Azienda
-  nome_azienda:'',nome_mm:'',anno:new Date().getFullYear(),
-  via:'',comune:'',cap:'',  logo_data:'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTk2IiBoZWlnaHQ9IjQ3IiB2aWV3Qm94PSIwIDAgMTk2IDQ3IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTQ1IDMyLjk3MDFMMjIuNDU3OSAzMi45NzAxQzE3LjQ5MjkgMzIuOTcwMSAxMy40NjggMjguOTM3NyAxMy40NjggMjMuOTYzNEMxMy40NjggMTkuMDAwOCAxNy41MDIyIDE0Ljk1NjYgMjIuNDc4OCAxNC45NTY2QzI3LjQ3ODYgMTQuOTU2NiAzMS41MzE2IDE5LjAxOTYgMzEuNTMxNiAyNC4wMDU0TDMxLjUzMTYgMzIuOTcwMUw0NSAzMi45NzAxTDQ0Ljk5OTYgMjQuMDA1NEM0NC45OTk3IDExLjU0NDEgMzQuODkzNSAxLjQ2MzM4IDIyLjQ3ODggMS40NjMzOEMxMC4wODczIDEuNDYzMzggMi4yODc1ZS0wNiAxMS41MjUzIDIuODMxMTllLTA2IDIzLjk2MzRDMy4zNzQzN2UtMDYgMzYuMzg5OCAxMC4wNTQ3IDQ2LjQ2MzQgMjIuNDU3OSA0Ni40NjM0TDQ1IDQ2LjQ2MzRMNDUgMzIuOTcwMVoiIGZpbGw9IiMwMDg5RkYiLz4KPHBhdGggZD0iTTE4NC4yMjkgNDYuNTk5N0MxODIuMDU4IDQ2LjU5OTcgMTgwLjA3OCA0Ni4xNDUgMTc4LjI4OSA0NS4yMzU3QzE3Ni41IDQ0LjI5NyAxNzUuMDc3IDQyLjk0NzcgMTc0LjAyMSA0MS4xODc3QzE3Mi45OTQgMzkuNDI3NyAxNzIuNDgxIDM3LjM1OTcgMTcyLjQ4MSAzNC45ODM3QzE3Mi40ODEgMzIuNTc4MyAxNzIuOTk0IDMwLjQ5NTcgMTc0LjAyMSAyOC43MzU3QzE3NS4wNzcgMjYuOTc1NyAxNzYuNSAyNS42NDEgMTc4LjI4OSAyNC43MzE3QzE4MC4wNzggMjMuODIyMyAxODIuMDU4IDIzLjM2NzcgMTg0LjIyOSAyMy4zNjc3QzE4Ni40IDIzLjM2NzcgMTg4LjM2NSAyMy44MjIzIDE5MC4xMjUgMjQuNzMxN0MxOTEuOTE0IDI1LjY0MSAxOTMuMzIyIDI2Ljk3NTcgMTk0LjM0OSAyOC43MzU3QzE5NS40MDUgMzAuNDk1NyAxOTUuOTMzIDMyLjU3ODMgMTk1LjkzMyAzNC45ODM3QzE5NS45MzMgMzcuMzU5NyAxOTUuNDA1IDM5LjQyNzcgMTk0LjM0OSA0MS4xODc3QzE5My4zMjIgNDIuOTQ3NyAxOTEuOTE0IDQ0LjI5NyAxOTAuMTI1IDQ1LjIzNTdDMTg4LjMzNiA0Ni4xNDUgMTg2LjM3IDQ2LjU5OTcgMTg0LjIyOSA0Ni41OTk3Wk0xODQuMjczIDQwLjIxOTdDMTg1LjY4MSA0MC4yMTk3IDE4Ni43OTYgMzkuNzUwMyAxODcuNjE3IDM4LjgxMTdDMTg4LjQzOCAzNy44NDM3IDE4OC44NDkgMzYuNTY3NyAxODguODQ5IDM0Ljk4MzdDMTg4Ljg0OSAzMy4zOTk3IDE4OC40MzggMzIuMTM4MyAxODcuNjE3IDMxLjE5OTdDMTg2Ljc5NiAzMC4yMzE3IDE4NS42ODEgMjkuNzQ3NyAxODQuMjczIDI5Ljc0NzdDMTgyLjg2NSAyOS43NDc3IDE4MS43MzYgMzAuMjMxNyAxODAuODg1IDMxLjE5OTdDMTgwLjAzNCAzMi4xNjc3IDE3OS42MDkgMzMuNDI5IDE3OS42MDkgMzQuOTgzN0MxNzkuNjA5IDM2LjUzODMgMTgwLjAzNCAzNy43OTk3IDE4MC44ODUgMzguNzY3N0MxODEuNzM2IDM5LjczNTcgMTgyLjg2NSA0MC4yMTk3IDE4NC4yNzMgNDAuMjE5N1oiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0xNjguMDUxIDI2Ljc1NThDMTY4LjU3OSAyNy41NDc4IDE2OC45MTYgMjguNDEzMSAxNjkuMDYzIDI5LjM1MThDMTY5LjIzOSAzMC4yOTA0IDE2OS4zMjcgMzEuNDYzOCAxNjkuMzI3IDMyLjg3MThWNDUuOTM5OEgxNjIuNTA3VjMzLjcwNzhDMTYyLjUwNyAzMi4yOTk4IDE2Mi4yNTggMzEuMjczMSAxNjEuNzU5IDMwLjYyNzhDMTYxLjI2IDI5Ljk1MzEgMTYwLjQ4MyAyOS42MTU4IDE1OS40MjcgMjkuNjE1OEMxNTguNCAyOS42MTU4IDE1Ny42MDggMjkuOTUzMSAxNTcuMDUxIDMwLjYyNzhDMTU2LjUyMyAzMS4yNzMxIDE1Ni4yNTkgMzIuMTUzMSAxNTYuMjU5IDMzLjI2NzhWNDUuOTM5OEgxNDkuNDM5VjMzLjcwNzhDMTQ5LjQzOSAzMi4yOTk4IDE0OS4xOSAzMS4yNzMxIDE0OC42OTEgMzAuNjI3OEMxNDguMTkyIDI5Ljk1MzEgMTQ3LjQxNSAyOS42MTU4IDE0Ni4zNTkgMjkuNjE1OEMxNDUuMzMyIDI5LjYxNTggMTQ0LjU0IDI5Ljk1MzEgMTQzLjk4MyAzMC42Mjc4QzE0My40NTUgMzEuMjczMSAxNDMuMTkxIDMyLjE1MzEgMTQzLjE5MSAzMy4yNjc4VjQ1LjkzOThIMTM2LjI4M1YyMy45ODM4SDE0Mi40ODdMMTQyLjYxOSAyNi4yMjc4QzE0My40MTEgMjUuNDA2NCAxNDQuMzc5IDI0Ljc0NjQgMTQ1LjUyMyAyNC4yNDc4QzE0Ni42OTYgMjMuNzQ5MSAxNDcuOTQzIDIzLjQ5OTggMTQ5LjI2MyAyMy40OTk4QzE1MS43ODYgMjMuNDk5OCAxNTMuNjc4IDI0LjQyMzggMTU0LjkzOSAyNi4yNzE4QzE1NS43MzEgMjUuNDUwNCAxNTYuNzE0IDI0Ljc5MDQgMTU3Ljg4NyAyNC4yOTE4QzE1OS4wOSAyMy43NjM4IDE2MC4zOTUgMjMuNDk5OCAxNjEuODAzIDIzLjQ5OThDMTYzLjEyMyAyMy40OTk4IDE2NC4zMjYgMjMuNzkzMSAxNjUuNDExIDI0LjM3OThDMTY2LjQ5NiAyNC45MzcxIDE2Ny4zNzYgMjUuNzI5MSAxNjguMDUxIDI2Ljc1NThaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTI3LjkzMyAyMS4wMzU3QzEyNi44NDcgMjEuMDM1NyAxMjUuOTM4IDIwLjY2OTEgMTI1LjIwNSAxOS45MzU3QzEyNC40NzEgMTkuMTczMSAxMjQuMTA1IDE4LjI0OTEgMTI0LjEwNSAxNy4xNjM3QzEyNC4xMDUgMTYuMTA3NyAxMjQuNDcxIDE1LjE5ODQgMTI1LjIwNSAxNC40MzU3QzEyNS45MzggMTMuNjczMSAxMjYuODQ3IDEzLjI5MTcgMTI3LjkzMyAxMy4yOTE3QzEyOS4wMTggMTMuMjkxNyAxMjkuOTI3IDEzLjY3MzEgMTMwLjY2MSAxNC40MzU3QzEzMS40MjMgMTUuMTk4NCAxMzEuODA1IDE2LjEwNzcgMTMxLjgwNSAxNy4xNjM3QzEzMS44MDUgMTguMjQ5MSAxMzEuNDIzIDE5LjE3MzEgMTMwLjY2MSAxOS45MzU3QzEyOS45MjcgMjAuNjY5MSAxMjkuMDE4IDIxLjAzNTcgMTI3LjkzMyAyMS4wMzU3Wk0xMjEuMjQ1IDIzLjk4MzdIMTMxLjcxN1Y0NS45Mzk4SDEyNC43MjFWMjkuMzk1OEgxMjEuMjQ1VjIzLjk4MzdaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTEzLjk1OSAzNi4zOTE3QzExMy45NTkgMzcuODg3NyAxMTQuMzQxIDM4LjkxNDQgMTE1LjEwMyAzOS40NzE3QzExNS44OTUgMzkuOTk5NyAxMTcuMTI3IDQwLjI2MzcgMTE4Ljc5OSA0MC4yNjM3VjQ2LjExNTdIMTE2Ljg2M0MxMTMuNTQ5IDQ2LjExNTcgMTExLjA4NSA0NS4zOTcxIDEwOS40NzEgNDMuOTU5N0MxMDcuODU4IDQyLjUyMjQgMTA3LjA1MSA0MC4xOTA0IDEwNy4wNTEgMzYuOTYzN1YyOS4zOTU3SDEwMy44MzlWMjMuOTgzN0gxMDcuMDUxVjE5LjY3MTdMMTEzLjk1OSAxOC4yMTk3VjIzLjk4MzdIMTE4Ljc1NVYyOS4zOTU3SDExMy45NTlWMzYuMzkxN1oiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik05OC4wMTc4IDM2LjM5MTdDOTguMDE3OCAzNy44ODc3IDk4LjM5OTIgMzguOTE0NCA5OS4xNjE4IDM5LjQ3MTdDOTkuOTUzOCAzOS45OTk3IDEwMS4xODYgNDAuMjYzNyAxMDIuODU4IDQwLjI2MzdWNDYuMTE1N0gxMDAuOTIyQzk3LjYwNzIgNDYuMTE1NyA5NS4xNDMyIDQ1LjM5NzEgOTMuNTI5OCA0My45NTk3QzkxLjkxNjUgNDIuNTIyNCA5MS4xMDk4IDQwLjE5MDQgOTEuMTA5OCAzNi45NjM3VjI5LjM5NTdIODcuODk3OFYyMy45ODM3SDkxLjEwOThWMTkuNjcxN0w5OC4wMTc4IDE4LjIxOTdWMjMuOTgzN0gxMDIuODE0VjI5LjM5NTdIOTguMDE3OFYzNi4zOTE3WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTcwLjI5MiA0Ni40Njc3QzY3LjM4OCA0Ni40Njc3IDY0Ljc0OCA0NS44MjI0IDYyLjM3MiA0NC41MzE3QzYwLjAyNTMgNDMuMjExNyA1OC4xNjI3IDQxLjM0OSA1Ni43ODQgMzguOTQzN0M1NS40MzQ3IDM2LjUwOSA1NC43NiAzMy42OTMgNTQuNzYgMzAuNDk1N0M1NC43NiAyNy4zMjc3IDU1LjQzNDcgMjQuNTQxIDU2Ljc4NCAyMi4xMzU3QzU4LjE2MjcgMTkuNzMwNCA2MC4wMjUzIDE3Ljg4MjQgNjIuMzcyIDE2LjU5MTdDNjQuNzQ4IDE1LjI3MTcgNjcuMzg4IDE0LjYxMTcgNzAuMjkyIDE0LjYxMTdDNzMuMTk2IDE0LjYxMTcgNzUuODIxMyAxNS4yNzE3IDc4LjE2OCAxNi41OTE3QzgwLjU0NCAxNy44ODI0IDgyLjQwNjcgMTkuNzMwNCA4My43NTYgMjIuMTM1N0M4NS4xMzQ3IDI0LjU0MSA4NS44MjQgMjcuMzI3NyA4NS44MjQgMzAuNDk1N0M4NS44MjQgMzMuNjkzIDg1LjEzNDcgMzYuNTA5IDgzLjc1NiAzOC45NDM3QzgyLjQwNjcgNDEuMzQ5IDgwLjU0NCA0My4yMTE3IDc4LjE2OCA0NC41MzE3Qzc1LjgyMTMgNDUuODIyNCA3My4xOTYgNDYuNDY3NyA3MC4yOTIgNDYuNDY3N1pNNzAuMjkyIDM5LjczNTdDNzIuNjM4NyAzOS43MzU3IDc0LjUxNiAzOC45MjkgNzUuOTI0IDM3LjMxNTdDNzcuMzYxMyAzNS43MDI0IDc4LjA4IDMzLjQyOSA3OC4wOCAzMC40OTU3Qzc4LjA4IDI3LjUzMyA3Ny4zNjEzIDI1LjI1OTcgNzUuOTI0IDIzLjY3NTdDNzQuNTE2IDIyLjA5MTcgNzIuNjM4NyAyMS4yOTk3IDcwLjI5MiAyMS4yOTk3QzY3LjkxNiAyMS4yOTk3IDY2LjAwOTMgMjIuMDkxNyA2NC41NzIgMjMuNjc1N0M2My4xNjQgMjUuMjU5NyA2Mi40NiAyNy41MzMgNjIuNDYgMzAuNDk1N0M2Mi40NiAzMy40MjkgNjMuMTY0IDM1LjcwMjQgNjQuNTcyIDM3LjMxNTdDNjYuMDA5MyAzOC45MjkgNjcuOTE2IDM5LjczNTcgNzAuMjkyIDM5LjczNTdaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K',
-  // Personale
-  totale:'',analizzati:'',risposte:'',orario_in:'8:00',orario_out:'18:00',
-  // Dotazioni
-  navetta:false,carpooling:false,tpl_incentivi:false,bike_work:false,
-  smart_working:false,mensa:false,docce:false,posti_auto:'0',posti_bici:'0',
-  // Trasporto
-  stazione:false,metro:false,bus:false,bike_sharing:false,car_sharing:false,piste:false,
-  // Mobilità attuale
-  n_auto:'',n_tpl:'',n_attiva:'',dist_km:'',prop_pct:'41',
-  // Propensione
-  prop_diverso:'',prop_remoto:'',prop_opzione:'',prop_carpooling:'',
-  // Misure
-  misure_text:'',
-  // Calcoli Procedura 1 — SW / TPL / Attiva
-  p1_persone:'',p1_distanza:'',p1_tasso_occ:'1.2',p1_giorni:'45',
-  // Calcoli Procedura 2 — Carpooling / Car sharing
-  p2_corse:'',p2_distanza:'',p2_tasso_occ:'1.2',p2_giorni:'45',
-  // Calcoli Procedura 3 — Navetta
-  p3_persone:'',p3_dist_auto:'',p3_viaggi_giorno:'',p3_dist_navetta:'',p3_giorni:'',
-  // Monitoraggio
+// ═══════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════
+const LOGOSVG = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTk2IiBoZWlnaHQ9IjQ3IiB2aWV3Qm94PSIwIDAgMTk2IDQ3IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTQ1IDMyLjk3MDFMMjIuNDU3OSAzMi45NzAxQzE3LjQ5MjkgMzIuOTcwMSAxMy40NjggMjguOTM3NyAxMy40NjggMjMuOTYzNEMxMy40NjggMTkuMDAwOCAxNy41MDIyIDE0Ljk1NjYgMjIuNDc4OCAxNC45NTY2QzI3LjQ3ODYgMTQuOTU2NiAzMS41MzE2IDE5LjAxOTYgMzEuNTMxNiAyNC4wMDU0TDMxLjUzMTYgMzIuOTcwMUw0NSAzMi45NzAxTDQ0Ljk5OTYgMjQuMDA1NEM0NC45OTk3IDExLjU0NDEgMzQuODkzNSAxLjQ2MzM4IDIyLjQ3ODggMS40NjMzOEMxMC4wODczIDEuNDYzMzggMi4yODc1ZS0wNiAxMS41MjUzIDIuODMxMTllLTA2IDIzLjk2MzRDMy4zNzQzN2UtMDYgMzYuMzg5OCAxMC4wNTQ3IDQ2LjQ2MzQgMjIuNDU3OSA0Ni40NjM0TDQ1IDQ2LjQ2MzRMNDUgMzIuOTcwMVoiIGZpbGw9IiMwMDg5RkYiLz48cGF0aCBkPSJNMTg0LjIyOSA0Ni41OTk3QzE4Mi4wNTggNDYuNTk5NyAxODAuMDc4IDQ2LjE0NSAxNzguMjg5IDQ1LjIzNTdDMTc2LjUgNDQuMjk3IDE3NS4wNzcgNDIuOTQ3NyAxNzQuMDIxIDQxLjE4NzdDMTcyLjk5NCAzOS40Mjc3IDE3Mi40ODEgMzcuMzU5NyAxNzIuNDgxIDM0Ljk4MzdDMTcyLjQ4MSAzMi41NzgzIDE3Mi45OTQgMzAuNDk1NyAxNzQuMDIxIDI4LjczNTdDMTc1LjA3NyAyNi45NzU3IDE3Ni41IDI1LjY0MSAxNzguMjg5IDI0LjczMTdDMTgwLjA3OCAyMy44MjIzIDE4Mi4wNTggMjMuMzY3NyAxODQuMjI5IDIzLjM2NzdDMTg2LjQgMjMuMzY3NyAxODguMzY1IDIzLjgyMjMgMTkwLjEyNSAyNC43MzE3QzE5MS45MTQgMjUuNjQxIDE5My4zMjIgMjYuOTc1NyAxOTQuMzQ5IDI4LjczNTdDMTk1LjQwNSAzMC40OTU3IDE5NS45MzMgMzIuNTc4MyAxOTUuOTMzIDM0Ljk4MzdDMTk1LjkzMyAzNy4zNTk3IDE5NS40MDUgMzkuNDI3NyAxOTQuMzQ5IDQxLjE4NzdDMTkzLjMyMiA0Mi45NDc3IDE5MS45MTQgNDQuMjk3IDE5MC4xMjUgNDUuMjM1N0MxODguMzM2IDQ2LjE0NSAxODYuMzcgNDYuNTk5NyAxODQuMjI5IDQ2LjU5OTdaTTE4NC4yNzMgNDAuMjE5N0MxODUuNjgxIDQwLjIxOTcgMTg2Ljc5NiAzOS43NTAzIDE4Ny42MTcgMzguODExN0MxODguNDM4IDM3Ljg0MzcgMTg4Ljg0OSAzNi41Njc3IDE4OC44NDkgMzQuOTgzN0MxODguODQ5IDMzLjM5OTcgMTg4LjQzOCAzMi4xMzgzIDE4Ny42MTcgMzEuMTk5N0MxODYuNzk2IDMwLjIzMTcgMTg1LjY4MSAyOS43NDc3IDE4NC4yNzMgMjkuNzQ3N0MxODIuODY1IDI5Ljc0NzcgMTgxLjczNiAzMC4yMzE3IDE4MC44ODUgMzEuMTk5N0MxODAuMDM0IDMyLjE2NzcgMTc5LjYwOSAzMy40MjkgMTc5LjYwOSAzNC45ODM3QzE3OS42MDkgMzYuNTM4MyAxODAuMDM0IDM3Ljc5OTcgMTgwLjg4NSAzOC43Njc3QzE4MS43MzYgMzkuNzM1NyAxODIuODY1IDQwLjIxOTcgMTg0LjI3MyA0MC4yMTk3WiIgZmlsbD0id2hpdGUiLz48cGF0aCBkPSJNNzAuMjkyIDQ2LjQ2NzdDNjcuMzg4IDQ2LjQ2NzcgNjQuNzQ4IDQ1LjgyMjQgNjIuMzcyIDQ0LjUzMTdDNjAuMDI1MyA0My4yMTE3IDU4LjE2MjcgNDEuMzQ5IDU2Ljc4NCAzOC45NDM3QzU1LjQzNDcgMzYuNTA5IDU0Ljc2IDMzLjY5MyA1NC43NiAzMC40OTU3QzU0Ljc2IDI3LjMyNzcgNTUuNDM0NyAyNC41NDEgNTYuNzg0IDIyLjEzNTdDNTguMTYyNyAxOS43MzA0IDYwLjAyNTMgMTcuODgyNCA2Mi4zNzIgMTYuNTkxN0M2NC43NDggMTUuMjcxNyA2Ny4zODggMTQuNjExNyA3MC4yOTIgMTQuNjExN0M3My4xOTYgMTQuNjExNyA3NS44MjEzIDE1LjI3MTcgNzguMTY4IDE2LjU5MTdDODAuNTQ0IDE3Ljg4MjQgODIuNDA2NyAxOS43MzA0IDgzLjc1NiAyMi4xMzU3Qzg1LjEzNDcgMjQuNTQxIDg1LjgyNCAyNy4zMjc3IDg1LjgyNCAzMC40OTU3Qzg1LjgyNCAzMy42OTMgODUuMTM0NyAzNi41MDkgODMuNzU2IDM4Ljk0MzdDODIuNDA2NyA0MS4zNDkgODAuNTQ0IDQzLjIxMTcgNzguMTY4IDQ0LjUzMTdDNzUuODIxMyA0NS44MjI0IDczLjE5NiA0Ni40Njc3IDcwLjI5MiA0Ni40Njc3Wk03MC4yOTIgMzkuNzM1N0M3Mi42Mzg3IDM5LjczNTcgNzQuNTE2IDM4LjkyOSA3NS45MjQgMzcuMzE1N0M3Ny4zNjEzIDM1LjcwMjQgNzguMDggMzMuNDI5IDc4LjA4IDMwLjQ5NTdDNzguMDggMjcuNTMzIDc3LjM2MTMgMjUuMjU5NyA3NS45MjQgMjMuNjc1N0M3NC41MTYgMjIuMDkxNyA3Mi42Mzg3IDIxLjI5OTcgNzAuMjkyIDIxLjI5OTdDNjcuOTE2IDIxLjI5OTcgNjYuMDA5MyAyMi4wOTE3IDY0LjU3MiAyMy42NzU3QzYzLjE2NCAyNS4yNTk3IDYyLjQ2IDI3LjUzMyA2Mi40NiAzMC40OTU3QzYyLjQ2IDMzLjQyOSA2My4xNjQgMzUuNzAyNCA2NC41NzIgMzcuMzE1N0M2Ni4wMDkzIDM4LjkyOSA2Ny45MTYgMzkuNzM1NyA3MC4yOTIgMzkuNzM1N1oiIGZpbGw9IndoaXRlIi8+PC9zdmc+';
+
+const D = {
+  nome_azienda:'', nome_mm:'', anno:new Date().getFullYear(),
+  via:'', comune:'', cap:'', logo_data:LOGOSVG,
+  totale:'', analizzati:'', risposte:'', orario_in:'8:00', orario_out:'18:00',
+  navetta:false, carpooling:false, tpl_incentivi:false, bike_work:false,
+  smart_working:false, mensa:false, docce:false, posti_auto:'0', posti_bici:'0',
+  stazione:false, metro:false, bus:false, bike_sharing:false, car_sharing:false, piste:false,
+  n_auto:'', n_tpl:'', n_attiva:'', dist_km:'', prop_pct:'41',
+  misure_text:'', p1_persone:'', p1_distanza:'', p1_tasso_occ:'1.2', p1_giorni:'45',
+  p2_corse:'', p2_distanza:'', p2_tasso_occ:'1.2', p2_giorni:'45',
+  p3_persone:'', p3_dist_auto:'', p3_viaggi_giorno:'', p3_dist_navetta:'', p3_giorni:'',
   monitor_note:'',
-  // Immagini mappe
-  img_tpl:null,img_calore:null,img_ragg_tpl:null,img_ragg_auto:null,
-  img_ragg_bici:null,img_ragg_piedi:null,img_piste:null,
-  // Immagini grafici
-  img_g_sede:null,img_g_mezzo:null,img_g_sharing:null,img_g_tpl:null,
-  img_g_alimentazione:null,img_g_gruppo:null,img_g_eta:null,
-  img_g_genere:null,img_g_giorni:null,
-  // Immagini propensione
-  img_p_diverso:null,img_p_remoto:null,img_p_opzione:null,img_p_carpooling:null,
-  // Gantt
+  img_tpl:null, img_calore:null, img_ragg_tpl:null, img_ragg_auto:null,
+  img_ragg_bici:null, img_ragg_piedi:null, img_piste:null,
+  img_g_sede:null, img_g_mezzo:null, img_g_sharing:null, img_g_tpl:null,
+  img_g_alim:null, img_g_gruppo:null, img_g_eta:null, img_g_genere:null, img_g_giorni:null,
+  img_p_diverso:null, img_p_remoto:null, img_p_opzione:null, img_p_carpooling:null,
   img_gantt:null,
 };
 
-const STEPS=[
-  'Azienda & Sede','Personale','Dotazioni','Offerta Trasporto',
-  'Mobilità Attuale','Propensione','Misure','Calcoli Emissioni','Monitoraggio','Genera PSCL'
-];
-let cur=0, pendImg=null;
-const $=id=>document.getElementById(id);
-const num=k=>Number(D[k])||0;
+const STEPS = ['Azienda','Personale','Dotazioni','Trasporto','Mobilità','Propensione','Misure','Calcoli','Monitoraggio','Genera PSCL'];
+let cur = 0, pendImg = null;
 
-// ── CALCULATIONS ─────────────────────────────────────
-function calcAll(){
-  // Procedura 1: SW/TPL/Attiva
-  // x = (((a/b)*c)*d*e)/1000
-  const p1_a=num('p1_persone'), p1_b=num('p1_tasso_occ')||1.2,
-        p1_c=num('p1_distanza')*2, p1_d=num('p1_giorni'),
-        eC=161.71922/1000, eN=0.304687/1000, eP=0.030991/1000;
-  const p1={
-    CO2:(((p1_a/p1_b)*p1_c)*p1_d*eC).toFixed(2),
-    NOx:(((p1_a/p1_b)*p1_c)*p1_d*eN).toFixed(2),
-    PM10:(((p1_a/p1_b)*p1_c)*p1_d*eP).toFixed(2),
-    n:p1_a
-  };
+// ═══════════════════════════════════════════════
+// UTILS
+// ═══════════════════════════════════════════════
+const $ = id => document.getElementById(id);
+const num = k => Number(D[k]) || 0;
 
-  // Procedura 2: Carpooling/Car sharing
-  // x = (((a/b)*c)*d*e)/1000  — a=corse, b=tasso occ, c=dist A/R, d=giorni
-  const p2_a=num('p2_corse'), p2_b=num('p2_tasso_occ')||1.2,
-        p2_c=num('p2_distanza')*2, p2_d=num('p2_giorni');
-  const p2={
-    CO2:(((p2_a/p2_b)*p2_c)*p2_d*eC).toFixed(2),
-    NOx:(((p2_a/p2_b)*p2_c)*p2_d*eN).toFixed(2),
-    PM10:(((p2_a/p2_b)*p2_c)*p2_d*eP).toFixed(2),
-    n:p2_a
-  };
-
-  // Procedura 3: Navetta
-  // x = ((((a/b)*c)*g*f)/1000) - ((d*e*h*f)/1000)
-  // a=persone sottratte auto, b=tasso occ auto, c=dist auto A/R
-  // d=viaggi navetta/giorno, e=dist navetta per viaggio, f=giorni operatività
-  // g=fattore emissione auto, h=fattore emissione navetta(autobus)
-  const p3_a=num('p3_persone'), p3_b=1.2,
-        p3_c=num('p3_dist_auto')*2, p3_f=num('p3_giorni'),
-        p3_d=num('p3_viaggi_giorno'), p3_e=num('p3_dist_navetta'),
-        eBus=717.99813/1000;
-  const p3_risparmio_auto=((p3_a/p3_b)*p3_c)*p3_f*eC;
-  const p3_emissione_navetta=p3_d*p3_e*p3_f*eBus;
-  const p3_net=Math.max(0, p3_risparmio_auto - p3_emissione_navetta);
-  const p3={
-    CO2: p3_net.toFixed(2),
-    NOx: Math.max(0,(((p3_a/p3_b)*p3_c)*p3_f*eN)-(p3_d*p3_e*p3_f*3.269033/1000)).toFixed(2),
-    PM10: Math.max(0,(((p3_a/p3_b)*p3_c)*p3_f*eP)-(p3_d*p3_e*p3_f*0.126615/1000)).toFixed(2),
-    n: p3_a
-  };
-
-  const tot={
-    CO2:(+p1.CO2+ +p2.CO2+ +p3.CO2).toFixed(2),
-    NOx:(+p1.NOx+ +p2.NOx+ +p3.NOx).toFixed(2),
-    PM10:(+p1.PM10+ +p2.PM10+ +p3.PM10).toFixed(2),
-    n: p1.n+p2.n+p3.n
-  };
-  return{p1,p2,p3,tot};
+function calcAll() {
+  const b1 = Math.max(0.1, num('p1_tasso_occ')), b2 = Math.max(0.1, num('p2_tasso_occ'));
+  const eC = 161.71922/1000, eN = 0.304687/1000, eP = 0.030991/1000;
+  const p1a = num('p1_persone'), p1c = num('p1_distanza')*2, p1d = num('p1_giorni');
+  const p1 = { n:p1a, CO2:(((p1a/b1)*p1c)*p1d*eC).toFixed(2), NOx:(((p1a/b1)*p1c)*p1d*eN).toFixed(2), PM10:(((p1a/b1)*p1c)*p1d*eP).toFixed(2) };
+  const p2a = num('p2_corse'), p2c = num('p2_distanza')*2, p2d = num('p2_giorni');
+  const p2 = { n:p2a, CO2:(((p2a/b2)*p2c)*p2d*eC).toFixed(2), NOx:(((p2a/b2)*p2c)*p2d*eN).toFixed(2), PM10:(((p2a/b2)*p2c)*p2d*eP).toFixed(2) };
+  const p3a = num('p3_persone'), p3c = num('p3_dist_auto')*2, p3f = num('p3_giorni');
+  const p3d = num('p3_viaggi_giorno'), p3e = num('p3_dist_navetta');
+  const p3CO2 = Math.max(0, (((p3a/1.2)*p3c)*p3f*eC) - (p3d*p3e*p3f*717.99813/1000));
+  const p3NOx  = Math.max(0, (((p3a/1.2)*p3c)*p3f*eN) - (p3d*p3e*p3f*3.269033/1000));
+  const p3PM10 = Math.max(0, (((p3a/1.2)*p3c)*p3f*eP) - (p3d*p3e*p3f*0.126615/1000));
+  const p3 = { n:p3a, CO2:p3CO2.toFixed(2), NOx:p3NOx.toFixed(2), PM10:p3PM10.toFixed(2) };
+  const tot = { n:p1.n+p2.n+p3.n, CO2:(+p1.CO2+ +p2.CO2+ +p3.CO2).toFixed(2), NOx:(+p1.NOx+ +p2.NOx+ +p3.NOx).toFixed(2), PM10:(+p1.PM10+ +p2.PM10+ +p3.PM10).toFixed(2) };
+  return { p1, p2, p3, tot };
 }
 
-function updateCalcPreview(){
-  const c=calcAll();
-  const u=(id,v)=>{const e=$(id);if(e)e.textContent=v;};
-  ['p1','p2','p3','tot'].forEach(p=>{
-    ['n','CO2','NOx','PM10'].forEach(k=>u(`prev-${p}-${k}`,c[p][k]));
+function bindInput(id, key) {
+  const el = $(id); if (!el) return;
+  el.value = D[key] ?? '';
+  el.addEventListener('input', () => { D[key] = el.value; updateCalc(); updateModal(); });
+}
+
+function bindYN(key) {
+  document.querySelectorAll('[data-yn="' + key + '"]').forEach(btn => {
+    const v = btn.dataset.val === 'true';
+    btn.className = 'ynb' + (D[key] === v ? (v ? ' ay' : ' an') : '');
+    btn.onclick = () => {
+      D[key] = v;
+      document.querySelectorAll('[data-yn="' + key + '"]').forEach(b => {
+        const bv = b.dataset.val === 'true';
+        b.className = 'ynb' + (D[key] === bv ? (bv ? ' ay' : ' an') : '');
+      });
+    };
   });
 }
 
-// ── IMAGE SLOTS ───────────────────────────────────────
-function setupSlot(sid,dk){
-  const slot=$(sid);if(!slot)return;
-  const body=slot.querySelector('.isl-body');
-  if(D[dk]){
-    body.className='isl-body has-img';
-    body.innerHTML=`<img src="${D[dk]}" alt=""/><button class="ibtn rm" onclick="clearImg('${dk}','${sid}')">✕ Rimuovi</button>`;
+function updateCalc() {
+  if (cur !== 7) return;
+  const c = calcAll();
+  ['p1','p2','p3','tot'].forEach(p => {
+    ['n','CO2','NOx','PM10'].forEach(k => { const e = $('pc-'+p+'-'+k); if(e) e.textContent = c[p][k]; });
+  });
+}
+
+function updateModal() {
+  if (cur !== 4) return;
+  const t = (num('n_auto')+num('n_tpl')+num('n_attiva')) || 1;
+  const e1=$('ms-tot'),e2=$('ms-a'),e3=$('ms-t'),e4=$('ms-m');
+  if(e1) e1.textContent=t;
+  if(e2) e2.textContent=D.n_auto+' ('+(num('n_auto')/t*100).toFixed(1)+'%)';
+  if(e3) e3.textContent=D.n_tpl+' ('+(num('n_tpl')/t*100).toFixed(1)+'%)';
+  if(e4) e4.textContent=D.n_attiva+' ('+(num('n_attiva')/t*100).toFixed(1)+'%)';
+}
+
+// ═══════════════════════════════════════════════
+// IMAGE SLOTS
+// ═══════════════════════════════════════════════
+function setupSlot(sid, dk) {
+  const slot = $(sid); if (!slot) return;
+  const body = slot.querySelector('.isb');
+  if (D[dk]) {
+    body.className = 'isb hi';
+    body.innerHTML = '<img src="'+D[dk]+'" alt=""/><button class="ibtn rm" onclick="clearImg(\''+dk+'\',\''+sid+'\')">✕ Rimuovi</button>';
   } else {
-    body.className='isl-body';
-    body.innerHTML=`<div class="isl-btns">
-      <button class="ibtn up" onclick="trigUp('${dk}','${sid}')">⬆ Carica da computer</button>
-      <button class="ibtn paste" onclick="trigPaste('${dk}','${sid}')">📋 Incolla screenshot</button>
-    </div>
-    <p class="isl-note">Scarica screenshot da Ottimo Survey → carica qui</p>`;
+    body.className = 'isb';
+    body.innerHTML = '<div class="ibtns"><button class="ibtn up" onclick="trigUp(\''+dk+'\',\''+sid+'\')">⬆ Carica</button><button class="ibtn pa" onclick="trigPaste(\''+dk+'\',\''+sid+'\')">📋 Incolla</button></div><p class="inote">Screenshot da Ottimo Survey</p>';
   }
 }
-function trigUp(dk,sid){pendImg={dk,sid};$('fi').click();}
-function clearImg(dk,sid){D[dk]=null;setupSlot(sid,dk);}
-function trigPaste(dk,sid){
-  pendImg={dk,sid};
-  navigator.clipboard.read().then(items=>{
-    for(const it of items){
-      const t=it.types.find(x=>x.startsWith('image/'));
-      if(t){it.getType(t).then(b=>{const r=new FileReader();r.onload=e=>{D[dk]=e.target.result;setupSlot(sid,dk);};r.readAsDataURL(b);});return;}
+
+function trigUp(dk, sid) { pendImg = {dk, sid}; $('fi').click(); }
+function clearImg(dk, sid) { D[dk] = null; setupSlot(sid, dk); }
+function trigPaste(dk, sid) {
+  pendImg = {dk, sid};
+  navigator.clipboard.read().then(items => {
+    for (const it of items) {
+      const t = it.types.find(x => x.startsWith('image/'));
+      if (t) { it.getType(t).then(b => { const r=new FileReader(); r.onload=e=>{D[dk]=e.target.result;setupSlot(sid,dk);}; r.readAsDataURL(b); }); return; }
     }
-    alert('Nessuna immagine negli appunti. Usa prima Ctrl+C sullo screenshot.');
-  }).catch(()=>alert('Permesso appunti negato. Usa "Carica da computer".'));
+    alert('Nessuna immagine negli appunti.');
+  }).catch(() => alert('Permesso appunti negato. Usa Carica.'));
 }
-$('fi').addEventListener('change',function(){
-  if(!this.files[0]||!pendImg)return;
-  const r=new FileReader();
-  r.onload=e=>{
-    D[pendImg.dk]=e.target.result;
-    if(pendImg.isLogo){const la=$('logo-area');if(la)la.innerHTML=`<img src="${D.logo_data}" style="max-width:150px;max-height:78px;object-fit:contain"/>`;}
-    else setupSlot(pendImg.sid,pendImg.dk);
-    pendImg=null;
+
+$('fi').addEventListener('change', function() {
+  if (!this.files[0] || !pendImg) return;
+  const r = new FileReader();
+  r.onload = e => {
+    D[pendImg.dk] = e.target.result;
+    if (pendImg.isLogo) { const la=$('logo-area'); if(la) la.innerHTML='<img src="'+D.logo_data+'" style="max-width:160px;max-height:80px;object-fit:contain"/>'; }
+    else setupSlot(pendImg.sid, pendImg.dk);
+    pendImg = null;
   };
-  r.readAsDataURL(this.files[0]);this.value='';
+  r.readAsDataURL(this.files[0]); this.value = '';
 });
 
-function isl(sid,dk,lbl,hint){
-  return`<div class="isl" id="${sid}"><div class="isl-header"><span class="isl-label">📷 ${lbl}</span><span class="isl-hint">${hint||'Ottimo Survey → screenshot → carica'}</span></div><div class="isl-body"></div></div>`;
+function isl(sid, dk, lbl, hint) {
+  return '<div class="isl" id="'+sid+'"><div class="ish"><span class="isl-l">📷 '+lbl+'</span><span class="isl-h">'+hint+'</span></div><div class="isb"></div></div>';
 }
-function ynF(lbl,key,hint=''){
-  return`<div class="fgroup"><label class="fl">${lbl}</label>${hint?`<span class="fh">${hint}</span>`:''}<div class="yn"><button data-yn="${key}" data-val="true" class="yn button${D[key]?' ay':''}">Sì</button><button data-yn="${key}" data-val="false" class="yn button${!D[key]?' an':''}">No</button></div></div>`;
-}
-function bindYN(key){
-  document.querySelectorAll(`[data-yn="${key}"]`).forEach(btn=>{
-    const v=btn.dataset.val==='true';
-    btn.className='yn button'+(D[key]===v?(v?' ay':' an'):'');
-    btn.onclick=()=>{D[key]=v;document.querySelectorAll(`[data-yn="${key}"]`).forEach(b=>{const bv=b.dataset.val==='true';b.className='yn button'+(D[key]===bv?(bv?' ay':' an'):'');});};
-  });
-}
-function bindInput(id,key){
-  const el=$(id);if(!el)return;
-  el.value=D[key]??'';
-  el.addEventListener('input',()=>{D[key]=el.value;updateCalcPreview();});
+function ynF(lbl, key) {
+  return '<div><label style="display:block;font-weight:600;font-size:13px;margin-bottom:3px">'+lbl+'</label><div class="yn"><button class="ynb'+(D[key]?' ay':'')+'" data-yn="'+key+'" data-val="true">Sì</button><button class="ynb'+(!D[key]?' an':'')+'" data-yn="'+key+'" data-val="false">No</button></div></div>';
 }
 
-// ── STEP RENDERERS ────────────────────────────────────
-const RENDERS=[
-
-// 0: Azienda
-()=>`<div class="card">
-  <div class="section-badge">📋 Passaggio 1</div>
-  <div class="card-title">Azienda & Sede</div>
-  <div class="card-sub">Dati identificativi dell'organizzazione e della sede oggetto del PSCL</div>
-  <div class="fg">
-    <div class="cf fgroup">
-      <label class="fl">Logo aziendale (opzionale)</label>
-      <span class="fh">Apparirà sul frontespizio del report</span>
-      <div id="logo-area" onclick="pendImg={dk:'logo_data',sid:'logo-area',isLogo:true};$('fi').click()"
-        style="width:180px;height:88px;border:2px dashed var(--border);border-radius:12px;background:#f8fafc;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;transition:.15s"
-        onmouseover="this.style.borderColor='var(--blue)'" onmouseout="this.style.borderColor='var(--border)'">
-        ${D.logo_data?`<img src="${D.logo_data}" style="max-width:170px;max-height:82px;object-fit:contain"/>`:`<span style="font-size:12px;color:var(--muted);text-align:center;padding:8px">📷 Carica logo</span>`}
-      </div>
-    </div>
-    <div class="fgroup"><label class="fl">Nome azienda</label><input id="f-company" value="${D.nome_azienda}" placeholder="es. Rossi S.r.l."/></div>
-    <div class="fgroup"><label class="fl">Mobility Manager</label><input id="f-mm" value="${D.nome_mm}" placeholder="Nome e Cognome"/></div>
-    <div class="fgroup"><label class="fl">Anno del piano</label><input id="f-anno" type="number" value="${D.anno}"/></div>
-    <div></div>
-    <div class="fgroup"><label class="fl">Via e numero civico</label><input id="f-via" value="${D.via}" placeholder="es. Via Roma 1"/></div>
-    <div style="display:grid;grid-template-columns:2fr 1fr;gap:12px">
-      <div class="fgroup"><label class="fl">Comune</label><input id="f-comune" value="${D.comune}" placeholder="es. Milano"/></div>
-      <div class="fgroup"><label class="fl">CAP</label><input id="f-cap" value="${D.cap}" placeholder="es. 20121"/></div>
-    </div>
-  </div>
-</div>`,
-
-// 1: Personale
-()=>`<div class="card">
-  <div class="section-badge">👥 Passaggio 2</div>
-  <div class="card-title">Personale & Orari</div>
-  <div class="card-sub">Dimensione dell'organizzazione e partecipazione all'indagine di mobilità</div>
-  <div class="fg">
-    <div class="fgroup"><label class="fl">Numero totale del personale</label><input id="f-totale" type="number" value="${D.totale}" placeholder="es. 200"/></div>
-    <div class="fgroup"><label class="fl">Personale sottoposto all'indagine</label><input id="f-analiz" type="number" value="${D.analizzati}" placeholder="es. 200"/></div>
-    <div class="fgroup"><label class="fl">Risposte ricevute al questionario</label><input id="f-risp" type="number" value="${D.risposte}" placeholder="es. 150"/></div>
-    <div></div>
-    <div class="fgroup"><label class="fl">Orario di ingresso prevalente</label><input id="f-orin" value="${D.orario_in}" placeholder="08:00"/></div>
-    <div class="fgroup"><label class="fl">Orario di uscita prevalente</label><input id="f-orout" value="${D.orario_out}" placeholder="18:00"/></div>
-  </div>
-</div>`,
-
-// 2: Dotazioni
-()=>`<div class="card">
-  <div class="section-badge">🏢 Passaggio 3</div>
-  <div class="card-title">Dotazioni & Servizi Aziendali</div>
-  <div class="card-sub">Servizi di mobilità e infrastrutture già disponibili presso la sede</div>
-  <div class="fg">
-    ${ynF('Servizio di navetta privata','navetta')}
-    ${ynF('Piattaforma di carpooling','carpooling')}
-    ${ynF('Incentivi / sconti abbonamenti TPL','tpl_incentivi')}
-    ${ynF('Incentivi uso bicicletta (Bike to Work)','bike_work')}
-    ${ynF('Politica di lavoro da remoto (smart working)','smart_working')}
-    ${ynF('Mensa aziendale','mensa')}
-    ${ynF('Spogliatoi con docce','docce')}
-    <div class="fgroup"><label class="fl">Numero posti auto</label><input id="f-pauto" type="number" value="${D.posti_auto}"/></div>
-    <div class="fgroup"><label class="fl">Numero posti bici</label><input id="f-pbici" type="number" value="${D.posti_bici}"/></div>
-  </div>
-</div>`,
-
-// 3: Trasporto + mappe
-()=>`<div class="card">
-  <div class="section-badge">🚌 Passaggio 4</div>
-  <div class="card-title">Analisi dell'Offerta di Trasporto</div>
-  <div class="card-sub">Servizi disponibili entro 500 metri dalla sede</div>
-  <div class="fg">
-    ${ynF('Stazione ferroviaria','stazione')}
-    ${ynF('Stazione metropolitana','metro')}
-    ${ynF('Fermata bus / tram','bus')}
-    ${ynF('Bike sharing','bike_sharing')}
-    ${ynF('Car sharing','car_sharing')}
-    ${ynF('Piste ciclabili e ciclopedonali','piste')}
-  </div>
-</div>
-<div class="card">
-  <div class="card-title">🗺️ Mappe da Ottimo Survey</div>
-  <div class="card-sub">Vai in Ottimo Survey → Mappa della mobilità → fai screenshot → carica qui. Le immagini appariranno nel report finale.</div>
-  ${isl('sl-tpl','img_tpl','Trasporto pubblico + dipendenti','Ottimo Survey → Mappa della mobilità → Trasporto pubblico')}
-  ${isl('sl-calore','img_calore','Mappa di calore della mobilità aziendale','Ottimo Survey → Mappa della mobilità → Mappa di calore')}
-  ${isl('sl-ragg-tpl','img_ragg_tpl','Raggiungibilità trasporto pubblico locale','Ottimo Survey → Mappa della mobilità → Raggiungibilità TPL')}
-  ${isl('sl-ragg-auto','img_ragg_auto','Raggiungibilità auto','Ottimo Survey → Mappa della mobilità → Raggiungibilità auto')}
-  ${isl('sl-ragg-bici','img_ragg_bici','Raggiungibilità bicicletta','Ottimo Survey → Mappa della mobilità → Raggiungibilità bicicletta')}
-  ${isl('sl-ragg-piedi','img_ragg_piedi','Raggiungibilità a piedi','Ottimo Survey → Mappa della mobilità → Raggiungibilità a piedi')}
-  ${isl('sl-piste','img_piste','Piste ciclabili','Ottimo Survey → Mappa della mobilità → Piste ciclabili')}
-</div>`,
-
-// 4: Mobilità attuale + grafici
-()=>`<div class="card">
-  <div class="section-badge">🗺️ Passaggio 5</div>
-  <div class="card-title">Analisi delle Modalità Abituali di Spostamento Casa-Lavoro</div>
-  <div class="card-sub">Distribuzione modale rilevata dal questionario</div>
-  <div class="fg">
-    <div class="fgroup"><label class="fl">Distanza media spostamento — solo andata (km)</label><span class="fh">Media degli utenti che usano l'auto</span><input id="f-dist" type="number" value="${D.dist_km}" placeholder="es. 25"/></div>
-    <div></div>
-    <div class="fgroup"><label class="fl">Persone in auto privata / aziendale / moto</label><input id="f-nauto" type="number" value="${D.n_auto}" placeholder="es. 80"/></div>
-    <div class="fgroup"><label class="fl">Persone con trasporto pubblico (TPL)</label><input id="f-ntpl" type="number" value="${D.n_tpl}" placeholder="es. 50"/></div>
-    <div class="fgroup"><label class="fl">Persone con mobilità attiva (piedi / bici)</label><input id="f-natt" type="number" value="${D.n_attiva}" placeholder="es. 20"/></div>
-    <div style="display:flex;align-items:flex-end">
-      <div style="background:var(--blue-light);border-radius:10px;padding:14px 18px;width:100%">
-        <div style="font-size:11.5px;color:var(--muted)">Totale analizzato</div>
-        <div id="ms-tot" style="font-size:28px;font-weight:800;color:var(--blue)">${(num('n_auto')+num('n_tpl')+num('n_attiva'))||'—'}</div>
-        <div style="font-size:12px;color:var(--muted);margin-top:4px">
-          Auto: <span id="ms-auto">${D.n_auto||'—'}</span> &nbsp;·&nbsp; TPL: <span id="ms-tpl">${D.n_tpl||'—'}</span> &nbsp;·&nbsp; Attiva: <span id="ms-att">${D.n_attiva||'—'}</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="card">
-  <div class="card-title">📊 Grafici del questionario — da Ottimo Survey</div>
-  <div class="card-sub">Vai in Ottimo Survey → Dashboard → Grafici del questionario → scarica o screenshot → carica qui.</div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-    ${isl('sl-g-sede','img_g_sede','Indirizzo completo della sede di lavoro','Ottimo Survey → Dashboard → Grafici questionario')}
-    ${isl('sl-g-mezzo','img_g_mezzo','Mezzo principale della mobilità casa-lavoro','Ottimo Survey → Dashboard → Grafici questionario')}
-    ${isl('sl-g-sharing','img_g_sharing','Tipo di mezzo in sharing','Ottimo Survey → Dashboard → Grafici questionario')}
-    ${isl('sl-g-tpl','img_g_tpl','Tipo di trasporto pubblico utilizzato','Ottimo Survey → Dashboard → Grafici questionario')}
-    ${isl('sl-g-alim','img_g_alimentazione','Tipo di alimentazione dell\'auto','Ottimo Survey → Dashboard → Grafici questionario')}
-    ${isl('sl-g-gruppo','img_g_gruppo','Gruppo di dipendenti','Ottimo Survey → Dashboard → Grafici questionario')}
-    ${isl('sl-g-eta','img_g_eta','Fascia di età','Ottimo Survey → Dashboard → Grafici questionario')}
-    ${isl('sl-g-genere','img_g_genere','Genere di appartenenza','Ottimo Survey → Dashboard → Grafici questionario')}
-  </div>
-  ${isl('sl-g-giorni','img_g_giorni','Giorni di lavoro a settimana','Ottimo Survey → Dashboard → Grafici questionario')}
-</div>`,
-
-// 5: Propensione
-()=>`<div class="card">
-  <div class="section-badge">🔄 Passaggio 6</div>
-  <div class="card-title">Analisi della Propensione al Cambiamento negli Spostamenti Casa-Lavoro</div>
-  <div class="card-sub">Disponibilità del personale a modificare le proprie abitudini di mobilità verso modalità più sostenibili</div>
-  <div class="fg">
-    <div class="fgroup cf"><label class="fl">% dipendenti disposti a viaggiare diversamente</label><span class="fh">Risposta alla domanda "Può viaggiare in modo diverso rispetto alla modalità attuale?"</span>
-      <div style="display:flex;align-items:center;gap:14px;margin-top:6px">
-        <input type="range" id="f-prop" min="0" max="100" value="${D.prop_pct}" style="flex:1;accent-color:var(--blue)" oninput="D.prop_pct=this.value;$('prop-lbl').textContent=this.value+'%'"/>
-        <strong id="prop-lbl" style="color:var(--blue);font-size:22px;min-width:52px">${D.prop_pct}%</strong>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="card">
-  <div class="card-title">📊 Grafici propensione — da Ottimo Survey</div>
-  <div class="card-sub">Vai in Ottimo Survey → Dashboard → Grafici del questionario (sezione propensione) → carica qui.</div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-    ${isl('sl-p-diverso','img_p_diverso','Può viaggiare in modo diverso rispetto alla modalità attuale?','Ottimo Survey → Dashboard → Propensione')}
-    ${isl('sl-p-remoto','img_p_remoto','Può lavorare da remoto?','Ottimo Survey → Dashboard → Propensione')}
-    ${isl('sl-p-opzione','img_p_opzione','Quale di queste opzioni sarebbe più giusta per te?','Ottimo Survey → Dashboard → Propensione')}
-    ${isl('sl-p-carpooling','img_p_carpooling','Saresti disposto a condividere lo spostamento (Carpooling)?','Ottimo Survey → Dashboard → Propensione')}
-  </div>
-</div>`,
-
-// 6: Misure
-()=>`<div class="card">
-  <div class="section-badge">⚙️ Passaggio 7</div>
-  <div class="card-title">Progettazione delle Misure</div>
-  <div class="card-sub">Descrivi le misure di mobilità sostenibile da implementare nell'anno ${Number(D.anno)+1}</div>
-  <div class="fgroup">
-    <label class="fl">Misure da implementare</label>
-    <span class="fh">Elenca le misure una per riga (es. 1. Sistema di Carpooling, 2. Rimborso abbonamenti TPL…)</span>
-    <textarea id="f-misure" style="min-height:140px">${D.misure_text}</textarea>
-  </div>
-</div>`,
-
-// 7: Calcoli
-()=>`<div class="card">
-  <div class="section-badge">📐 Passaggio 8</div>
-  <div class="card-title">Calcoli delle Emissioni Evitate</div>
-  <div class="card-sub">Conformemente all'Allegato 4 delle Linee Guida (D.I. 179/2021) — Fattori emissione ISPRA 2022: CO₂ = 161,72 g/km · NOx = 0,305 g/km · PM10 = 0,031 g/km</div>
-
-  <div class="calc-wrap">
-    <div class="calc-title">Procedura 1 — Lavoro da remoto / TPL / Mobilità attiva</div>
-    <div class="calc-hint">Per gli utenti che smettono di usare l'auto perché passano a smart working, TPL o mobilità attiva.<br>Formula: x = (((a/b) × c) × d × e) / 1000</div>
-    <div class="fg">
-      <div class="fgroup"><label class="fl">a) Quante persone smettono di usare l'auto grazie alle misure?</label><input id="f-p1-persone" type="number" value="${D.p1_persone}" placeholder="es. 10" oninput="D.p1_persone=this.value;updateCalcPreview()"/></div>
-      <div class="fgroup"><label class="fl">b) Qual è la distanza media sola andata degli utenti auto (km)?</label><input id="f-p1-dist" type="number" value="${D.p1_distanza}" placeholder="es. 25" oninput="D.p1_distanza=this.value;updateCalcPreview()"/></div>
-      <div class="fgroup"><label class="fl">c) Tasso medio di occupazione dell'auto</label><span class="fh">Valore standard: 1,2</span><input id="f-p1-occ" type="number" step="0.1" value="${D.p1_tasso_occ}" oninput="D.p1_tasso_occ=this.value;updateCalcPreview()"/></div>
-      <div class="fgroup"><label class="fl">d) Quanti giorni/anno questi utenti non usano più l'auto?</label><span class="fh">Valore standard: 45 giorni</span><input id="f-p1-giorni" type="number" value="${D.p1_giorni}" oninput="D.p1_giorni=this.value;updateCalcPreview()"/></div>
-    </div>
-  </div>
-
-  <div class="calc-wrap" style="margin-top:16px">
-    <div class="calc-title">Procedura 2 — Carpooling / Car sharing</div>
-    <div class="calc-hint">Per gli utenti che condividono il viaggio in auto o usano car sharing.<br>Formula: x = (((a/b) × c) × d × e) / 1000</div>
-    <div class="fg">
-      <div class="fgroup"><label class="fl">g) Quante corse verranno effettuate con auto condivise / carpooling?</label><input id="f-p2-corse" type="number" value="${D.p2_corse}" placeholder="es. 5" oninput="D.p2_corse=this.value;updateCalcPreview()"/></div>
-      <div class="fgroup"><label class="fl">h) Distanza media sola andata per corsa carpooling (km)?</label><input id="f-p2-dist" type="number" value="${D.p2_distanza}" placeholder="es. 20" oninput="D.p2_distanza=this.value;updateCalcPreview()"/></div>
-      <div class="fgroup"><label class="fl">c) Tasso medio di occupazione dell'auto</label><span class="fh">Valore standard: 1,2</span><input id="f-p2-occ" type="number" step="0.1" value="${D.p2_tasso_occ}" oninput="D.p2_tasso_occ=this.value;updateCalcPreview()"/></div>
-      <div class="fgroup"><label class="fl">i) Quanti giorni lavorativi/anno verrà usato il sistema di condivisione?</label><span class="fh">Valore standard: 45 giorni</span><input id="f-p2-giorni" type="number" value="${D.p2_giorni}" oninput="D.p2_giorni=this.value;updateCalcPreview()"/></div>
-    </div>
-  </div>
-
-  <div class="calc-wrap" style="margin-top:16px">
-    <div class="calc-title">Procedura 3 — Navetta aziendale</div>
-    <div class="calc-hint">Per gli utenti che usano la navetta aziendale al posto dell'auto privata. Lascia a zero se non applicabile.<br>Formula: x = ((((a/b)×c)×g×f)/1000) − ((d×e×h×f)/1000)</div>
-    <div class="fg3">
-      <div class="fgroup"><label class="fl">a) Quante persone smettono di usare l'auto grazie alla navetta?</label><input id="f-p3-persone" type="number" value="${D.p3_persone}" placeholder="es. 15" oninput="D.p3_persone=this.value;updateCalcPreview()"/></div>
-      <div class="fgroup"><label class="fl">c) Distanza media sola andata degli utenti auto (km)?</label><input id="f-p3-dist-auto" type="number" value="${D.p3_dist_auto}" placeholder="es. 30" oninput="D.p3_dist_auto=this.value;updateCalcPreview()"/></div>
-      <div class="fgroup"><label class="fl">d) Quante corse fa la navetta al giorno (andata + ritorno)?</label><input id="f-p3-viaggi" type="number" value="${D.p3_viaggi_giorno}" placeholder="es. 2" oninput="D.p3_viaggi_giorno=this.value;updateCalcPreview()"/></div>
-      <div class="fgroup"><label class="fl">e) Distanza percorsa dalla navetta per ogni corsa (km)?</label><input id="f-p3-dist-nav" type="number" value="${D.p3_dist_navetta}" placeholder="es. 15" oninput="D.p3_dist_navetta=this.value;updateCalcPreview()"/></div>
-      <div class="fgroup"><label class="fl">f) Quanti giorni/anno opera la navetta?</label><input id="f-p3-giorni" type="number" value="${D.p3_giorni}" placeholder="es. 220" oninput="D.p3_giorni=this.value;updateCalcPreview()"/></div>
-    </div>
-  </div>
-
-  <div class="result-wrap">
-    <div class="result-title">✅ Risparmio emissioni calcolato — aggiornato in tempo reale</div>
-    <table class="ctable">
-      <thead><tr><th>Procedura</th><th class="r">Utenti/Corse</th><th class="r">CO₂ kg/anno</th><th class="r">NOx kg/anno</th><th class="r">PM10 kg/anno</th></tr></thead>
-      <tbody>
-        <tr><td>1 — Smart working / TPL / Mobilità attiva</td><td class="r" id="prev-p1-n">—</td><td class="r" id="prev-p1-CO2">—</td><td class="r" id="prev-p1-NOx">—</td><td class="r" id="prev-p1-PM10">—</td></tr>
-        <tr><td>2 — Carpooling / Car sharing</td><td class="r" id="prev-p2-n">—</td><td class="r" id="prev-p2-CO2">—</td><td class="r" id="prev-p2-NOx">—</td><td class="r" id="prev-p2-PM10">—</td></tr>
-        <tr><td>3 — Navetta aziendale</td><td class="r" id="prev-p3-n">—</td><td class="r" id="prev-p3-CO2">—</td><td class="r" id="prev-p3-NOx">—</td><td class="r" id="prev-p3-PM10">—</td></tr>
-        <tr class="tot"><td>TOTALE</td><td class="r" id="prev-tot-n">—</td><td class="r" id="prev-tot-CO2">—</td><td class="r" id="prev-tot-NOx">—</td><td class="r" id="prev-tot-PM10">—</td></tr>
-      </tbody>
-    </table>
-  </div>
-</div>`,
-
-// 8: Monitoraggio
-()=>`<div class="card">
-  <div class="section-badge">📅 Passaggio 9</div>
-  <div class="card-title">Programma di Implementazione & Monitoraggio</div>
-  <div class="card-sub">Tempistiche e modalità di verifica dell'efficacia delle misure</div>
-  <div class="fgroup" style="margin-bottom:18px">
-    <label class="fl">Note sul programma di monitoraggio (opzionale)</label>
-    <textarea id="f-monitor">${D.monitor_note}</textarea>
-  </div>
-  ${isl('sl-gantt','img_gantt','Gantt trimestrale programma di implementazione misure','Ottimo Survey o compilare manualmente')}
-  <div style="background:var(--green-light);border-radius:12px;padding:16px 20px;margin-top:16px;border-left:4px solid var(--green)">
-    <div style="font-weight:700;color:#15803d;margin-bottom:4px">✅ Pronto per generare il report!</div>
-    <div style="font-size:13px;color:#166534;line-height:1.7">Clicca <strong>Genera PSCL</strong> per visualizzare il report completo. Potrai stamparlo o salvarlo come PDF.</div>
-  </div>
-</div>`,
-];
-
-// ── HTML / WORD EXPORT ────────────────────────────────
-function exportHTML(){
-  renderReport();
-  const content = $('rc').innerHTML;
-  const html = `<!DOCTYPE html>
-<html lang="it"><head><meta charset="UTF-8"/>
-<title>PSCL ${D.nome_azienda||'report'} ${D.anno}</title>
-<style>
-body{font-family:'Segoe UI',Arial,sans-serif;color:#111;font-size:11pt;margin:0;padding:0;background:#fff}
-.rcov{background:linear-gradient(135deg,#0f172a,#1d4ed8 55%,#00b4a0);color:#fff;padding:40px 52px 32px;display:grid;grid-template-columns:1fr 180px;gap:24px;align-items:center}
-.rbadge{background:rgba(255,255,255,.2);border-radius:5px;padding:3px 12px;font-size:10px;letter-spacing:2px;text-transform:uppercase;display:inline-block;margin-bottom:12px}
-.rcomp{font-size:28px;font-weight:800;margin-bottom:6px}.rtit{font-size:16px;opacity:.85;margin-bottom:10px}.rmeta{font-size:12px;opacity:.7;line-height:1.9}
-.rlogo-wrap{display:flex;flex-direction:column;align-items:center;gap:8px}
-.rlogo-box{width:150px;height:84px;background:rgba(255,255,255,.12);border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.rlogo-box img{max-width:140px;max-height:78px;object-fit:contain}
-.rconf-badge{background:rgba(255,255,255,.15);border-radius:6px;padding:5px 12px;font-size:11px;font-weight:700;text-align:center;color:#fff;width:100%}
-.rsh{background:linear-gradient(90deg,#0f172a,#1d4ed8 60%,#00b4a0);padding:14px 52px;display:flex;align-items:center;gap:14px}
-.rsh-num{font-size:30px;font-weight:800;color:rgba(255,255,255,.25)}.rsh-title{font-size:15px;font-weight:700;color:#fff}
-.rc{padding:24px 52px}
-.rh4{font-size:13px;font-weight:700;color:#f07010;margin:20px 0 7px;border-left:4px solid #f07010;padding-left:9px}
-.rp{font-size:12.5px;line-height:1.85;margin-bottom:10px}.rp strong{color:#1e3a8a}
-.krow{display:flex;gap:12px;margin:14px 0;flex-wrap:wrap}
-.kpi{flex:1;min-width:110px;background:#f8fafc;border-radius:9px;padding:12px 14px;border-left:4px solid #2563eb}
-.kv{font-size:22px;font-weight:800;color:#2563eb;line-height:1}.kl{font-size:11px;color:#6b7280;margin-top:3px;line-height:1.4}
-.kpi.g{border-color:#16a34a}.kpi.g .kv{color:#16a34a}.kpi.o{border-color:#f07010}.kpi.o .kv{color:#f07010}.kpi.r{border-color:#dc2626}.kpi.r .kv{color:#dc2626}
-.etw{background:#f0fdf4;border:1.5px solid #86efac;border-radius:10px;padding:14px;margin:12px 0}
-.ett{font-weight:700;color:#15803d;margin-bottom:8px;font-size:13px}
-table{width:100%;border-collapse:collapse;font-size:12px;margin:8px 0}
-th{background:#2563eb;color:#fff;padding:6px 10px;text-align:left;font-size:11px}
-th.r,td.r{text-align:right}td{padding:6px 10px;border-bottom:1px solid #e5e7eb}
-tr.tot td{font-weight:700;color:#15803d;border-top:2px solid #86efac;border-bottom:none}
-.en{font-size:11px;color:#15803d;margin-top:6px}
-.dn{color:#dc2626;font-weight:700}.up{color:#16a34a;font-weight:700}
-.mlist{background:#f8fafc;border-radius:9px;padding:14px 18px;font-size:12.5px;line-height:1.9;white-space:pre-wrap;border-left:4px solid #2563eb;margin:10px 0}
-.norm-li{font-size:12.5px;line-height:1.9;padding-left:18px}.norm-li li{margin-bottom:2px}
-.rfoot{background:#0f172a;color:rgba(255,255,255,.45);padding:14px 52px;font-size:11px;display:flex;justify-content:space-between}
-.img-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
-.img-cap-report{font-size:12px;font-weight:700;color:#1e3a8a;border-left:3px solid #2563eb;padding-left:7px;margin:14px 0 5px}
-img{max-width:100%;height:auto;display:block;border-radius:7px;border:1px solid #e5e7eb}
-@media print{.rcov,.rsh{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
-</style></head><body>${content}</body></html>`;
-  // Use data URI instead of blob — works in all browsers including Edge
-  const dataUri = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
-  const a = document.createElement('a');
-  a.href = dataUri;
-  a.download = `PSCL_${(D.nome_azienda||'report').replace(/\s+/g,'_')}_${D.anno}.html`;
-  a.click();
+// ═══════════════════════════════════════════════
+// STEP RENDERERS
+// ═══════════════════════════════════════════════
+function render(n) {
+  const steps = [s0,s1,s2,s3,s4,s5,s6,s7,s8];
+  $('fv').innerHTML = steps[n]();
+  // bind inputs
+  [['f-co','nome_azienda'],['f-mm','nome_mm'],['f-via','via'],['f-co2','comune'],['f-cap','cap'],
+   ['f-tot','totale'],['f-an','analizzati'],['f-ri','risposte'],['f-oin','orario_in'],['f-out','orario_out'],
+   ['f-pa','posti_auto'],['f-pb','posti_bici'],['f-na','n_auto'],['f-nt','n_tpl'],['f-nm','n_attiva'],
+   ['f-dk','dist_km'],['f-mi','misure_text'],['f-mo','monitor_note'],
+   ['f-p1p','p1_persone'],['f-p1d','p1_distanza'],['f-p1o','p1_tasso_occ'],['f-p1g','p1_giorni'],
+   ['f-p2c','p2_corse'],['f-p2d','p2_distanza'],['f-p2o','p2_tasso_occ'],['f-p2g','p2_giorni'],
+   ['f-p3p','p3_persone'],['f-p3da','p3_dist_auto'],['f-p3v','p3_viaggi_giorno'],['f-p3dn','p3_dist_navetta'],['f-p3g','p3_giorni'],
+  ].forEach(p => bindInput(p[0], p[1]));
+  const fa=$('f-anno'); if(fa){fa.value=D.anno;fa.addEventListener('input',()=>D.anno=fa.value);}
+  ['navetta','carpooling','tpl_incentivi','bike_work','smart_working','mensa','docce','stazione','metro','bus','bike_sharing','car_sharing','piste'].forEach(k=>bindYN(k));
+  const la=$('logo-area');
+  if(la) la.onclick=()=>{pendImg={dk:'logo_data',sid:'logo-area',isLogo:true};$('fi').click();};
+  [['sl-tpl','img_tpl'],['sl-cal','img_calore'],['sl-rt','img_ragg_tpl'],['sl-ra','img_ragg_auto'],['sl-rb','img_ragg_bici'],['sl-rp','img_ragg_piedi'],['sl-pi','img_piste'],
+   ['sl-gs','img_g_sede'],['sl-gm','img_g_mezzo'],['sl-gh','img_g_sharing'],['sl-gt','img_g_tpl'],['sl-ga','img_g_alim'],['sl-gg','img_g_gruppo'],['sl-ge','img_g_eta'],['sl-gn','img_g_genere'],['sl-gd','img_g_giorni'],
+   ['sl-pd','img_p_diverso'],['sl-pr','img_p_remoto'],['sl-po','img_p_opzione'],['sl-pc','img_p_carpooling'],['sl-ga2','img_gantt'],
+  ].forEach(p=>setupSlot(p[0],p[1]));
+  const pp=$('f-prop'); if(pp){pp.value=D.prop_pct;pp.addEventListener('input',()=>{D.prop_pct=pp.value;const pl=$('plbl');if(pl)pl.textContent=pp.value+'%';});}
+  if(n===7) updateCalc();
+  if(n===4) updateModal();
 }
 
-// ── WORD EXPORT (kept for Chrome) ─────────────────────
-function exportWord(){
-  renderReport();
-  const content = $('rc').innerHTML;
-  const html = `<html xmlns:o='urn:schemas-microsoft-com:office:office'
-    xmlns:w='urn:schemas-microsoft-com:office:word'
-    xmlns='http://www.w3.org/TR/REC-html40'>
-    <head><meta charset='UTF-8'>
-    <style>
-      body{font-family:Calibri,Arial,sans-serif;color:#111;font-size:11pt;margin:2cm}
-      h2,h3{color:#1d4ed8}.rcomp{font-size:22pt;font-weight:bold;color:#fff}
-      .rcov{background:#1d4ed8;color:#fff;padding:20pt 30pt;margin-bottom:16pt}
-      .rsh{background:#1d4ed8;color:#fff;padding:10pt 20pt;margin:16pt 0 8pt}
-      .rsh-title{font-size:14pt;font-weight:bold;color:#fff}
-      .rh4{font-size:11pt;font-weight:bold;color:#f07010;border-left:4pt solid #f07010;padding-left:8pt;margin:14pt 0 6pt}
-      .rc{padding:0 8pt}.rp{font-size:10.5pt;line-height:1.7;margin-bottom:8pt}
-      .krow{display:table;width:100%;margin:10pt 0}
-      .kpi{display:table-cell;padding:8pt 12pt;background:#f1f5f9;border-left:3pt solid #2563eb;width:22%}
-      .kv{font-size:18pt;font-weight:bold;color:#2563eb}.kl{font-size:9pt;color:#666}
-      .kpi.g .kv{color:#16a34a}.kpi.o .kv{color:#f07010}.kpi.r .kv{color:#dc2626}
-      table{border-collapse:collapse;width:100%;font-size:10pt;margin:8pt 0}
-      th{background:#2563eb;color:#fff;padding:6pt 8pt;text-align:left}th.r,td.r{text-align:right}
-      td{padding:5pt 8pt;border-bottom:1pt solid #e5e7eb}
-      tr.tot td{font-weight:bold;border-top:2pt solid #86efac;color:#15803d}
-      .etw{background:#f0fdf4;border:1pt solid #86efac;padding:10pt;margin:8pt 0}
-      .ett{font-weight:bold;color:#15803d;margin-bottom:6pt}
-      .mlist{background:#f8fafc;border-left:3pt solid #2563eb;padding:8pt 12pt;font-size:10.5pt;white-space:pre-wrap;margin:8pt 0}
-      .rfoot{background:#0f172a;color:#aaa;padding:8pt 20pt;font-size:9pt;margin-top:16pt}
-      .img-grid{display:table;width:100%;margin:8pt 0}
-      .img-grid-item{display:table-cell;width:48%;padding:0 4pt;vertical-align:top}
-      .img-cap-report{font-size:10pt;font-weight:bold;border-left:3pt solid #2563eb;padding-left:6pt;margin:10pt 0 4pt;color:#111}
-      img{max-width:100%;height:auto;display:block;margin:4pt 0}
-      .rbadge,.rconf-badge,.rsh-num{display:none}
-      .norm-li{font-size:10.5pt;line-height:1.8;padding-left:14pt}
-      .norm-li li{margin-bottom:3pt}
-      .en{font-size:9pt;color:#4ade80;margin-top:6pt}
-    </style></head><body>${content}</body></html>`;
-  const blob = new Blob(['\ufeff'+html], {type:'application/msword'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = `PSCL_${(D.nome_azienda||'report').replace(/\s+/g,'_')}_${D.anno}.doc`;
-  a.click();
-}
+function s0(){return '<div class="card"><div class="sbadge">Passaggio 1</div><div class="ctit">🏢 Azienda &amp; Sede</div><div class="csub">Dati identificativi dell\'organizzazione</div><div class="fg"><div class="cf"><label>Logo aziendale</label><div id="logo-area" style="width:180px;height:86px;border:2px dashed var(--border);border-radius:10px;background:var(--gray);display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden">'+(D.logo_data?'<img src="'+D.logo_data+'" style="max-width:170px;max-height:80px;object-fit:contain"/>':"<span style='font-size:12px;color:var(--muted);text-align:center;padding:8px'>📷 Carica logo</span>")+'</div></div><div><label>Nome azienda</label><input id="f-co" value="'+D.nome_azienda+'"/></div><div><label>Mobility Manager</label><input id="f-mm" value="'+D.nome_mm+'"/></div><div><label>Anno del piano</label><input id="f-anno" type="number" value="'+D.anno+'"/></div><div></div><div><label>Via e numero civico</label><input id="f-via" value="'+D.via+'"/></div><div style="display:grid;grid-template-columns:2fr 1fr;gap:10px"><div><label>Comune</label><input id="f-co2" value="'+D.comune+'"/></div><div><label>CAP</label><input id="f-cap" value="'+D.cap+'"/></div></div></div></div>';}
 
-// ── REPORT ────────────────────────────────────────────
-function renderReport(){
+function s1(){return '<div class="card"><div class="sbadge">Passaggio 2</div><div class="ctit">👥 Personale &amp; Orari</div><div class="csub">Dimensione e partecipazione</div><div class="fg"><div><label>Totale personale</label><input id="f-tot" type="number" value="'+D.totale+'"/></div><div><label>Personale nell\'indagine</label><input id="f-an" type="number" value="'+D.analizzati+'"/></div><div><label>Risposte ricevute</label><input id="f-ri" type="number" value="'+D.risposte+'"/></div><div></div><div><label>Orario ingresso</label><input id="f-oin" value="'+D.orario_in+'"/></div><div><label>Orario uscita</label><input id="f-out" value="'+D.orario_out+'"/></div></div></div>';}
+
+function s2(){return '<div class="card"><div class="sbadge">Passaggio 3</div><div class="ctit">🚗 Dotazioni &amp; Servizi</div><div class="csub">Servizi di mobilità già attivi</div><div class="fg">'+ynF('Navetta privata','navetta')+ynF('Piattaforma carpooling','carpooling')+ynF('Incentivi TPL','tpl_incentivi')+ynF('Bike to Work','bike_work')+ynF('Smart working','smart_working')+ynF('Mensa aziendale','mensa')+ynF('Spogliatoi/docce','docce')+'<div><label>Posti auto</label><input id="f-pa" type="number" value="'+D.posti_auto+'"/></div><div><label>Posti bici</label><input id="f-pb" type="number" value="'+D.posti_bici+'"/></div></div></div>';}
+
+function s3(){return '<div class="card"><div class="sbadge">Passaggio 4</div><div class="ctit">🚌 Offerta di Trasporto (entro 500m)</div><div class="csub">Servizi disponibili vicino alla sede</div><div class="fg">'+ynF('Stazione ferroviaria','stazione')+ynF('Metropolitana','metro')+ynF('Fermata bus/tram','bus')+ynF('Bike sharing','bike_sharing')+ynF('Car sharing','car_sharing')+ynF('Piste ciclabili','piste')+'</div></div><div class="card"><div class="ctit">🗺️ Mappe da Ottimo Survey</div><div class="csub">Vai in Ottimo Survey → Mappa della mobilità → screenshot → carica qui. Le mappe appaiono nel report sotto.</div>'+isl('sl-tpl','img_tpl','Trasporto pubblico + dipendenti','Ottimo Survey → Mappa della mobilità → Trasporto pubblico')+isl('sl-cal','img_calore','Mappa di calore della mobilità aziendale','Ottimo Survey → Mappa della mobilità → Mappa di calore')+isl('sl-rt','img_ragg_tpl','Raggiungibilità trasporto pubblico locale','Ottimo Survey → Mappa della mobilità → Raggiungibilità TPL')+isl('sl-ra','img_ragg_auto','Raggiungibilità auto','Ottimo Survey → Mappa della mobilità → Raggiungibilità auto')+isl('sl-rb','img_ragg_bici','Raggiungibilità bicicletta','Ottimo Survey → Mappa della mobilità → Raggiungibilità bicicletta')+isl('sl-rp','img_ragg_piedi','Raggiungibilità a piedi','Ottimo Survey → Mappa della mobilità → Raggiungibilità a piedi')+isl('sl-pi','img_piste','Piste ciclabili','Ottimo Survey → Mappa della mobilità → Piste ciclabili')+'</div>';}
+
+function s4(){
+  const t=(num('n_auto')+num('n_tpl')+num('n_attiva'))||1;
+  return '<div class="card"><div class="sbadge">Passaggio 5</div><div class="ctit">🗺️ Mobilità Attuale</div><div class="csub">Risultati del questionario</div><div class="fg"><div><label>Distanza media sola andata (km)</label><div class="fh">Media degli utenti auto — base per i calcoli</div><input id="f-dk" type="number" value="'+D.dist_km+'"/></div><div></div><div><label>🚗 Persone in auto / moto</label><input id="f-na" type="number" value="'+D.n_auto+'"/></div><div><label>🚌 Persone con TPL</label><input id="f-nt" type="number" value="'+D.n_tpl+'"/></div><div><label>🚲 Persone con mobilità attiva</label><input id="f-nm" type="number" value="'+D.n_attiva+'"/></div><div style="display:flex;align-items:flex-end"><div style="background:#eff6ff;border-radius:10px;padding:12px 16px;width:100%"><div style="font-size:11px;color:var(--muted)">Totale analizzato</div><div id="ms-tot" style="font-size:26px;font-weight:800;color:var(--blue)">'+t+'</div><div style="font-size:12px;color:var(--muted);margin-top:4px">Auto: <span id="ms-a">'+D.n_auto+'</span> · TPL: <span id="ms-t">'+D.n_tpl+'</span> · Att.: <span id="ms-m">'+D.n_attiva+'</span></div></div></div><div class="cf"><label>% disponibili a cambiare modalità</label><div class="fh">Risposta "Può viaggiare in modo diverso?"</div><div style="display:flex;align-items:center;gap:14px;margin-top:6px"><input type="range" id="f-prop" min="0" max="100" value="'+D.prop_pct+'" style="flex:1;accent-color:var(--blue)"/><strong id="plbl" style="color:var(--blue);font-size:22px;min-width:50px">'+D.prop_pct+'%</strong></div></div></div></div>'
+  +'<div class="card"><div class="ctit">📊 Grafici questionario — da Ottimo Survey</div><div class="csub">Ottimo Survey → Dashboard → Grafici del questionario → screenshot → carica qui</div><div class="grid2">'+isl('sl-gs','img_g_sede','Indirizzo sede di lavoro di destinazione','Ottimo Survey → Dashboard → Grafici questionario')+isl('sl-gm','img_g_mezzo','Mezzo principale della mobilità casa-lavoro','Ottimo Survey → Dashboard → Grafici questionario')+isl('sl-gh','img_g_sharing','Tipo di mezzo in sharing','Ottimo Survey → Dashboard → Grafici questionario')+isl('sl-gt','img_g_tpl','Tipo di trasporto pubblico utilizzato','Ottimo Survey → Dashboard → Grafici questionario')+isl('sl-ga','img_g_alim','Tipo di alimentazione dell\'auto','Ottimo Survey → Dashboard → Grafici questionario')+isl('sl-gg','img_g_gruppo','Gruppo di dipendenti','Ottimo Survey → Dashboard → Grafici questionario')+isl('sl-ge','img_g_eta','Fascia di età','Ottimo Survey → Dashboard → Grafici questionario')+isl('sl-gn','img_g_genere','Genere di appartenenza','Ottimo Survey → Dashboard → Grafici questionario')+'</div>'+isl('sl-gd','img_g_giorni','Giorni di lavoro a settimana','Ottimo Survey → Dashboard → Grafici questionario')+'</div>';}
+
+function s5(){
+  return '<div class="card"><div class="sbadge">Passaggio 6</div><div class="ctit">🔄 Propensione al Cambiamento</div><div class="csub">Analisi della propensione al cambiamento negli spostamenti casa-lavoro</div><div class="fg"><div class="cf"><label>% dipendenti disponibili a cambiare modalità</label><div class="fh">Risposta "Può viaggiare in modo diverso rispetto alla modalità attuale?"</div><div style="display:flex;align-items:center;gap:14px;margin-top:6px"><input type="range" id="f-prop" min="0" max="100" value="'+D.prop_pct+'" style="flex:1;accent-color:var(--blue)" oninput="D.prop_pct=this.value;document.getElementById(\'plbl\').textContent=this.value+\'%\'"/><strong id="plbl" style="color:var(--blue);font-size:22px;min-width:50px">'+D.prop_pct+'%</strong></div></div></div></div>'
+  +'<div class="card"><div class="ctit">📊 Grafici propensione — da Ottimo Survey</div><div class="csub">Ottimo Survey → Dashboard → Grafici del questionario (sezione propensione) → screenshot → carica qui</div><div class="grid2">'+isl('sl-pd','img_p_diverso','Può viaggiare in modo diverso rispetto alla modalità attuale?','Ottimo Survey → Dashboard → Propensione')+isl('sl-pr','img_p_remoto','Può lavorare da remoto?','Ottimo Survey → Dashboard → Propensione')+isl('sl-po','img_p_opzione','Quale di queste opzioni sarebbe più giusta per te?','Ottimo Survey → Dashboard → Propensione')+isl('sl-pc','img_p_carpooling','Saresti disposto a condividere lo spostamento (Carpooling)?','Ottimo Survey → Dashboard → Propensione')+'</div></div>';}
+
+function s6(){return '<div class="card"><div class="sbadge">Passaggio 7</div><div class="ctit">⚙️ Misure da Implementare</div><div class="csub">Descrivi le misure per l\'anno '+(Number(D.anno)+1)+'</div><div><label style="display:block;font-weight:600;font-size:13px;margin-bottom:3px">Misure da implementare</label><textarea id="f-mi" style="min-height:140px">'+D.misure_text+'</textarea></div></div>';}
+
+function s7(){
   const c=calcAll();
-  const tot=(num('n_auto')+num('n_tpl')+num('n_attiva'))||1;
+  return '<div class="card"><div class="sbadge">Passaggio 8</div><div class="ctit">📐 Calcoli Emissioni Evitate</div><div class="csub">Allegato 4, D.I. 179/2021 — Fattori ISPRA 2022: CO₂ 161,72 g/km · NOx 0,305 g/km · PM10 0,031 g/km</div>'
+  +'<div class="cbox" style="margin-bottom:14px"><div class="ctit2">Procedura 1 — Smart working / TPL / Mobilità attiva</div><div class="cpar">Formula: x = (((a/b)×c)×d×e)/1000</div><div class="fg"><div><label style="display:block;font-weight:600;font-size:13px;margin-bottom:3px">a) N° persone che smettono di usare l\'auto</label><input id="f-p1p" type="number" value="'+D.p1_persone+'" oninput="D.p1_persone=this.value;updateCalc()"/></div><div><label style="display:block;font-weight:600;font-size:13px;margin-bottom:3px">b) Distanza media sola andata (km)</label><input id="f-p1d" type="number" value="'+D.p1_distanza+'" oninput="D.p1_distanza=this.value;updateCalc()"/></div><div><label style="display:block;font-weight:600;font-size:13px;margin-bottom:3px">c) Tasso occupazione auto (default 1,2)</label><input id="f-p1o" type="number" step="0.1" value="'+D.p1_tasso_occ+'" oninput="D.p1_tasso_occ=this.value;updateCalc()"/></div><div><label style="display:block;font-weight:600;font-size:13px;margin-bottom:3px">d) Giorni/anno (default 45)</label><input id="f-p1g" type="number" value="'+D.p1_giorni+'" oninput="D.p1_giorni=this.value;updateCalc()"/></div></div></div>'
+  +'<div class="cbox" style="margin-bottom:14px"><div class="ctit2">Procedura 2 — Carpooling / Car sharing</div><div class="cpar">Formula: x = (((a/b)×c)×d×e)/1000</div><div class="fg"><div><label style="display:block;font-weight:600;font-size:13px;margin-bottom:3px">g) N° corse con auto condivise / carpooling</label><input id="f-p2c" type="number" value="'+D.p2_corse+'" oninput="D.p2_corse=this.value;updateCalc()"/></div><div><label style="display:block;font-weight:600;font-size:13px;margin-bottom:3px">h) Distanza media sola andata per corsa (km)</label><input id="f-p2d" type="number" value="'+D.p2_distanza+'" oninput="D.p2_distanza=this.value;updateCalc()"/></div><div><label style="display:block;font-weight:600;font-size:13px;margin-bottom:3px">c) Tasso occupazione auto (default 1,2)</label><input id="f-p2o" type="number" step="0.1" value="'+D.p2_tasso_occ+'" oninput="D.p2_tasso_occ=this.value;updateCalc()"/></div><div><label style="display:block;font-weight:600;font-size:13px;margin-bottom:3px">i) Giorni/anno sistema condivisione (default 45)</label><input id="f-p2g" type="number" value="'+D.p2_giorni+'" oninput="D.p2_giorni=this.value;updateCalc()"/></div></div></div>'
+  +'<div class="cbox" style="margin-bottom:14px"><div class="ctit2">Procedura 3 — Navetta aziendale (0 se non applicabile)</div><div class="cpar">Formula: x = ((((a/b)×c)×g×f)/1000) − ((d×e×h×f)/1000) — fattore navetta: CO₂ 717,99 g/km</div><div class="fg3"><div><label style="display:block;font-weight:600;font-size:13px;margin-bottom:3px">a) N° persone sottratte all\'auto grazie alla navetta</label><input id="f-p3p" type="number" value="'+D.p3_persone+'" oninput="D.p3_persone=this.value;updateCalc()"/></div><div><label style="display:block;font-weight:600;font-size:13px;margin-bottom:3px">c) Distanza media sola andata utenti auto (km)</label><input id="f-p3da" type="number" value="'+D.p3_dist_auto+'" oninput="D.p3_dist_auto=this.value;updateCalc()"/></div><div><label style="display:block;font-weight:600;font-size:13px;margin-bottom:3px">d) N° corse navetta al giorno (A+R)</label><input id="f-p3v" type="number" value="'+D.p3_viaggi_giorno+'" oninput="D.p3_viaggi_giorno=this.value;updateCalc()"/></div><div><label style="display:block;font-weight:600;font-size:13px;margin-bottom:3px">e) Distanza navetta per corsa (km)</label><input id="f-p3dn" type="number" value="'+D.p3_dist_navetta+'" oninput="D.p3_dist_navetta=this.value;updateCalc()"/></div><div><label style="display:block;font-weight:600;font-size:13px;margin-bottom:3px">f) Giorni/anno operatività navetta</label><input id="f-p3g" type="number" value="'+D.p3_giorni+'" oninput="D.p3_giorni=this.value;updateCalc()"/></div></div></div>'
+  +'<div class="rbox"><div class="rtit">✅ Risparmio emissioni — aggiornato in tempo reale</div><table class="ct"><thead><tr><th>Procedura</th><th class="r">Utenti/Corse</th><th class="r">CO₂ kg/a</th><th class="r">NOx kg/a</th><th class="r">PM10 kg/a</th></tr></thead><tbody>'
+  +'<tr><td>1 — SW / TPL / Mobilità attiva</td><td class="r" id="pc-p1-n">'+c.p1.n+'</td><td class="r" id="pc-p1-CO2">'+c.p1.CO2+'</td><td class="r" id="pc-p1-NOx">'+c.p1.NOx+'</td><td class="r" id="pc-p1-PM10">'+c.p1.PM10+'</td></tr>'
+  +'<tr><td>2 — Carpooling / Car sharing</td><td class="r" id="pc-p2-n">'+c.p2.n+'</td><td class="r" id="pc-p2-CO2">'+c.p2.CO2+'</td><td class="r" id="pc-p2-NOx">'+c.p2.NOx+'</td><td class="r" id="pc-p2-PM10">'+c.p2.PM10+'</td></tr>'
+  +'<tr><td>3 — Navetta aziendale</td><td class="r" id="pc-p3-n">'+c.p3.n+'</td><td class="r" id="pc-p3-CO2">'+c.p3.CO2+'</td><td class="r" id="pc-p3-NOx">'+c.p3.NOx+'</td><td class="r" id="pc-p3-PM10">'+c.p3.PM10+'</td></tr>'
+  +'<tr class="tot"><td>TOTALE</td><td class="r" id="pc-tot-n">'+c.tot.n+'</td><td class="r" id="pc-tot-CO2">'+c.tot.CO2+'</td><td class="r" id="pc-tot-NOx">'+c.tot.NOx+'</td><td class="r" id="pc-tot-PM10">'+c.tot.PM10+'</td></tr>'
+  +'</tbody></table></div></div>';}
+
+function s8(){return '<div class="card"><div class="sbadge">Passaggio 9</div><div class="ctit">📅 Monitoraggio &amp; Implementazione</div><div class="csub">Programma e note</div><div style="margin-bottom:16px"><label style="display:block;font-weight:600;font-size:13px;margin-bottom:3px">Note sul programma di monitoraggio</label><textarea id="f-mo">'+D.monitor_note+'</textarea></div>'+isl('sl-ga2','img_gantt','Gantt trimestrale programma di implementazione','Ottimo Survey o compilare manualmente')+'<div style="background:#f0fdf4;border-radius:10px;padding:14px;margin-top:14px;border-left:4px solid var(--green)"><div style="font-weight:700;color:#15803d;margin-bottom:4px">✅ Tutto pronto!</div><div style="font-size:13px;color:#166534">Clicca <strong>Genera PSCL</strong> per visualizzare il report.</div></div></div>';}
+
+// ═══════════════════════════════════════════════
+// REPORT
+// ═══════════════════════════════════════════════
+function renderReport() {
+  const c = calcAll();
+  const tot = (num('n_auto')+num('n_tpl')+num('n_attiva')) || 1;
+  const pA = (num('n_auto')/tot*100).toFixed(1), pT=(num('n_tpl')/tot*100).toFixed(1), pM=(num('n_attiva')/tot*100).toFixed(1);
+  const aN = Number(D.anno)+1;
+  const nA2 = Math.max(0,num('n_auto')-c.tot.n), nT2=num('n_tpl')+num('p1_persone');
+  const pA2=(nA2/tot*100).toFixed(1), pT2=(nT2/tot*100).toFixed(1);
+  const svcs = [D.stazione&&'stazione ferroviaria',D.metro&&'metropolitana',D.bus&&'bus/tram',D.bike_sharing&&'bike sharing',D.car_sharing&&'car sharing',D.piste&&'piste ciclabili'].filter(Boolean);
+
+  function ip(dk,lbl){
+    const cap='<div class="icap">'+lbl+'</div>';
+    if(D[dk]) return cap+'<img src="'+D[dk]+'" style="width:100%;border-radius:8px;border:1px solid var(--border);margin-bottom:14px"/>';
+    return cap+'<div style="border:2px dashed #c7d2fe;border-radius:8px;background:#f8faff;padding:16px;text-align:center;color:#818cf8;font-size:12.5px;margin-bottom:14px">[Immagine non caricata]</div>';
+  }
+  // 2-column table for charts
+  function ip2(dk1,lbl1,dk2,lbl2){
+    return '<table style="width:100%;border-collapse:collapse;margin:4px 0"><tr><td style="width:50%;vertical-align:top;padding-right:10px">'+ip(dk1,lbl1)+'</td><td style="width:50%;vertical-align:top;padding-left:10px">'+ip(dk2,lbl2)+'</td></tr></table>';
+  }
+
+  $('rc').innerHTML =
+  '<div class="rcov"><div><div class="rbadge">Piano degli Spostamenti Casa-Lavoro · PSCL Light</div><div class="rcomp">'+(D.nome_azienda||'[Azienda]')+'</div><div class="rtit2">Anno '+D.anno+'</div><div class="rmeta">📍 '+D.via+', '+D.cap+' '+D.comune+'<br>👤 Mobility Manager: <strong>'+(D.nome_mm||'—')+'</strong><br>📅 '+new Date().toLocaleDateString('it-IT')+'</div></div>'
+  +'<div class="rlogo"><div class="rlogo-b">'+(D.logo_data?'<img src="'+D.logo_data+'" alt="logo"/>':"<span style='color:rgba(255,255,255,.5);font-weight:800;font-size:18px'>Ottimo</span>")+'</div><div class="rconf">D.I. 179/2021 conforme</div></div></div>'
+
+  +'<div class="rsh"><div class="rsh-n">1</div><div class="rsh-t">Introduzione</div></div><div class="rc"><p class="rp">Il presente PSCL è redatto in conformità al <strong>D.I. 179/2021</strong>, per l\'anno <strong>'+D.anno+'</strong>. Elaborato dal Mobility Manager <strong>'+(D.nome_mm||'—')+'</strong> per <strong>'+(D.nome_azienda||'—')+'</strong>, sede: <strong>'+D.via+', '+D.cap+' '+D.comune+'</strong>.</p></div>'
+
+  +'<div class="rsh"><div class="rsh-n">2</div><div class="rsh-t">Parte Informativa e di Analisi</div></div><div class="rc">'
+  +'<div class="rh4">2.1 Analisi delle Condizioni Strutturali</div>'
+  +'<div class="krow"><div class="kpi"><div class="kv">'+(D.totale||'—')+'</div><div class="kl">Dipendenti totali</div></div><div class="kpi"><div class="kv">'+(D.risposte||'—')+'</div><div class="kl">Risposte questionario</div></div><div class="kpi"><div class="kv">'+(D.totale&&D.risposte?((D.risposte/D.totale)*100).toFixed(0)+'%':'—')+'</div><div class="kl">Tasso di risposta</div></div><div class="kpi o"><div class="kv">'+D.orario_in+'–'+D.orario_out+'</div><div class="kl">Orario Lun–Ven</div></div></div>'
+  +'<p class="rp">Sede: <strong>'+D.via+', '+D.cap+' '+D.comune+'</strong>. Dipendenti: <strong>'+D.totale+'</strong>, coinvolti: <strong>'+D.analizzati+'</strong>, risposte: <strong>'+D.risposte+'</strong>. Dotazioni: <strong>'+([D.navetta&&'navetta',D.carpooling&&'carpooling',D.tpl_incentivi&&'incentivi TPL',D.bike_work&&'Bike to Work',D.smart_working&&'smart working',D.mensa&&'mensa',D.docce&&'docce'].filter(Boolean).join(', ')||'nessuna')+'</strong>. Posti auto: <strong>'+D.posti_auto+'</strong> · Posti bici: <strong>'+D.posti_bici+'</strong>.</p>'
+
+  +'<div class="rh4">2.2 Analisi dell\'Offerta di Trasporto</div>'
+  +'<p class="rp">Entro 500m dalla sede: <strong>'+(svcs.join(', ')||'nessun servizio rilevato')+'</strong>.</p>'
+  +ip('img_tpl','Trasporto pubblico + dipendenti')
+  +ip('img_calore','Mappa di calore della mobilità aziendale')
+  +ip('img_ragg_tpl','Raggiungibilità trasporto pubblico locale')
+  +ip('img_ragg_auto','Raggiungibilità auto')
+  +ip('img_ragg_bici','Raggiungibilità bicicletta')
+  +ip('img_ragg_piedi','Raggiungibilità a piedi')
+  +ip('img_piste','Piste ciclabili e ciclopedonali')
+
+  +'<div class="rh4">2.3 Analisi delle Modalità Abituali di Spostamento</div>'
+  +'<div class="krow"><div class="kpi r"><div class="kv">'+pA+'%</div><div class="kl">🚗 Auto/moto<br>'+D.n_auto+' persone</div></div><div class="kpi"><div class="kv">'+pT+'%</div><div class="kl">🚌 TPL<br>'+D.n_tpl+' persone</div></div><div class="kpi g"><div class="kv">'+pM+'%</div><div class="kl">🚲 Attiva<br>'+D.n_attiva+' persone</div></div><div class="kpi o"><div class="kv">'+D.prop_pct+'%</div><div class="kl">Disponibili a cambiare</div></div></div>'
+  +'<p class="rp">Distanza media sola andata: <strong>'+D.dist_km+' km</strong>. Il <strong>'+D.prop_pct+'%</strong> è disponibile a cambiare modalità.</p>'
+  +ip2('img_g_sede','Indirizzo sede di lavoro di destinazione','img_g_mezzo','Mezzo principale della mobilità casa-lavoro')
+  +ip2('img_g_sharing','Tipo di mezzo in sharing','img_g_tpl','Tipo di trasporto pubblico utilizzato')
+  +ip2('img_g_alim','Tipo di alimentazione dell\'auto','img_g_gruppo','Gruppo di dipendenti')
+  +ip2('img_g_eta','Fascia di età','img_g_genere','Genere di appartenenza')
+  +ip('img_g_giorni','Giorni di lavoro a settimana')
+
+  +'<div class="rh4">2.4 Analisi della Propensione al Cambiamento</div>'
+  +'<p class="rp">Il <strong>'+D.prop_pct+'%</strong> del personale ha dichiarato disponibilità a modificare le proprie abitudini di mobilità.</p>'
+  +ip2('img_p_diverso','Può viaggiare in modo diverso rispetto alla modalità attuale?','img_p_remoto','Può lavorare da remoto?')
+  +ip2('img_p_opzione','Quale di queste opzioni sarebbe più giusta per te?','img_p_carpooling','Saresti disposto a condividere lo spostamento (Carpooling)?')
+  +'</div>'
+
+  +'<div class="rsh"><div class="rsh-n">3</div><div class="rsh-t">Parte Progettuale</div></div><div class="rc">'
+  +'<div class="rh4">3.1 Misure da Implementare nell\'Anno '+aN+'</div>'
+  +'<div class="ml">'+(D.misure_text||'[Misure non definite]')+'</div>'
+  +'<div class="rh4">3.2 Stima Riduzione Emissioni (Anno '+aN+')</div>'
+  +'<p class="rp">Calcolo secondo <strong>Allegato 4, D.I. 179/2021</strong>. Distanza A/R <strong>'+num('dist_km')*2+' km</strong>, tasso occupazione <strong>1,2</strong>, giorni/anno <strong>45</strong>, fattori ISPRA 2022.</p>'
+  +'<div class="etw"><div class="ett">Cruscotto Impatto Ambientale PSCL — Risparmio annuo stimato</div><table class="et"><thead><tr><th>Procedura</th><th class="r">Utenti/Corse</th><th class="r">CO₂ kg/anno</th><th class="r">NOx kg/anno</th><th class="r">PM10 kg/anno</th></tr></thead><tbody>'
+  +'<tr><td>Proc. 1 — SW / TPL / Mobilità attiva</td><td class="r">'+c.p1.n+'</td><td class="r">'+c.p1.CO2+'</td><td class="r">'+c.p1.NOx+'</td><td class="r">'+c.p1.PM10+'</td></tr>'
+  +'<tr><td>Proc. 2 — Carpooling / Car sharing</td><td class="r">'+c.p2.n+'</td><td class="r">'+c.p2.CO2+'</td><td class="r">'+c.p2.NOx+'</td><td class="r">'+c.p2.PM10+'</td></tr>'
+  +'<tr><td>Proc. 3 — Navetta aziendale (netto)</td><td class="r">'+c.p3.n+'</td><td class="r">'+c.p3.CO2+'</td><td class="r">'+c.p3.NOx+'</td><td class="r">'+c.p3.PM10+'</td></tr>'
+  +'<tr class="tot"><td>TOTALE</td><td class="r">'+c.tot.n+'</td><td class="r">'+c.tot.CO2+'</td><td class="r">'+c.tot.NOx+'</td><td class="r">'+c.tot.PM10+'</td></tr>'
+  +'</tbody></table><div class="en">* Allegato 4, D.I. 179/2021. Formula: x = (((a/b)×c)×d×e)/1000</div></div>'
+  +'<div class="rh4">3.3 Variazione Modale Attesa (Anno '+aN+')</div>'
+  +'<table class="mt"><thead><tr><th>Modalità</th><th class="r">Attuale '+D.anno+'</th><th class="r">Obiettivo '+aN+'</th><th class="r">Δ</th></tr></thead><tbody>'
+  +'<tr><td>🚗 Auto / moto</td><td class="r">'+D.n_auto+' ('+pA+'%)</td><td class="r">'+nA2+' ('+pA2+'%)</td><td class="r"><span class="dn">−'+c.tot.n+'</span></td></tr>'
+  +'<tr><td>🚌 Trasporto pubblico</td><td class="r">'+D.n_tpl+' ('+pT+'%)</td><td class="r">'+nT2+' ('+pT2+'%)</td><td class="r"><span class="up">+'+num('p1_persone')+'</span></td></tr>'
+  +'<tr><td>🚲 Mobilità attiva</td><td class="r">'+D.n_attiva+' ('+pM+'%)</td><td class="r">'+D.n_attiva+' ('+pM+'%)</td><td class="r" style="color:var(--muted)">—</td></tr>'
+  +'</tbody></table>'
+  +'<div class="rh4">3.4 Programma di Implementazione</div>'
+  +ip('img_gantt','Gantt trimestrale programma di implementazione')
+  +'</div>'
+
+  +'<div class="rsh"><div class="rsh-n">4</div><div class="rsh-t">Programma di Monitoraggio</div></div><div class="rc"><p class="rp">'+(D.monitor_note||'Il monitoraggio verrà effettuato tramite questionario aggiornato nell\'anno '+aN+'.')+'</p></div>'
+
+  +'<div class="rsh"><div class="rsh-n">5</div><div class="rsh-t">Riferimenti Normativi</div></div><div class="rc"><ul class="nli"><li>Decreto Interministeriale n. 179 del 12 maggio 2021</li><li>Decreto Interdirettoriale n. 209 del 4 agosto 2021</li><li>Linee Guida PSCL (art. 3 comma 5, G.U. n. 124 del 26 maggio 2021)</li><li>Indirizzi operativi per i Mobility Manager d\'Area (24 luglio 2024)</li></ul></div>'
+
+  +'<div class="rfoot"><span>'+(D.nome_azienda||'—')+' · PSCL '+D.anno+' · MM: '+(D.nome_mm||'—')+'</span><span>Ottimo PSCL Generator · '+new Date().toLocaleDateString('it-IT')+'</span></div>';
+}
+
+// ═══════════════════════════════════════════════
+// WORD EXPORT — using data URI, no external library
+// ═══════════════════════════════════════════════
+function startWord() {
+  const btn = $('wbtn');
+  btn.textContent = '⏳ Generazione...';
+  btn.disabled = true;
+  setTimeout(() => {
+    try { doWordExport(); } catch(e) { alert('Errore: ' + e.message); }
+    btn.textContent = '📝 Scarica Word';
+    btn.disabled = false;
+  }, 50);
+}
+
+function doWordExport() {
+  const c = calcAll();
+  const tot = (num('n_auto')+num('n_tpl')+num('n_attiva')) || 1;
   const pA=(num('n_auto')/tot*100).toFixed(1), pT=(num('n_tpl')/tot*100).toFixed(1), pM=(num('n_attiva')/tot*100).toFixed(1);
-  const aN=Number(D.anno)+1;
+  const aN = Number(D.anno)+1;
   const nA2=Math.max(0,num('n_auto')-c.tot.n), nT2=num('n_tpl')+num('p1_persone');
   const pA2=(nA2/tot*100).toFixed(1), pT2=(nT2/tot*100).toFixed(1);
   const svcs=[D.stazione&&'stazione ferroviaria',D.metro&&'metropolitana',D.bus&&'bus/tram',D.bike_sharing&&'bike sharing',D.car_sharing&&'car sharing',D.piste&&'piste ciclabili'].filter(Boolean);
 
-  // single image with caption
-  function ip(dk,lbl){
-    if(D[dk])return`<div><div class="img-cap-report">${lbl}</div><img src="${D[dk]}" style="width:100%;border-radius:8px;border:1px solid var(--border)"/></div>`;
-    return`<div><div class="img-cap-report">${lbl}</div><div style="border:2px dashed #c7d2fe;border-radius:8px;background:#f8faff;padding:16px;text-align:center;color:#818cf8;font-size:12.5px">📊 <em>Immagine non caricata</em></div></div>`;
+  function wi(dk,lbl){
+    const cap='<p style="font-size:10pt;font-weight:bold;color:#1e3a8a;border-left:3pt solid #2563eb;padding-left:6pt;margin:12pt 0 3pt">'+lbl+'</p>';
+    if(D[dk]) return cap+'<img src="'+D[dk]+'" style="width:100%;max-width:600pt;display:block;margin-bottom:10pt;border:1pt solid #e5e7eb"/>';
+    return cap+'<p style="color:#818cf8;font-style:italic;font-size:10pt;margin-bottom:10pt">[Immagine non caricata]</p>';
   }
-  // grafici 2 per riga
-  function ip2(dk1,lbl1,dk2,lbl2){
-    return `<table style="width:100%;border-collapse:collapse;margin:4px 0">
-      <tr>
-        <td style="width:50%;padding-right:10px;vertical-align:top">${ip(dk1,lbl1)}</td>
-        <td style="width:50%;padding-left:10px;vertical-align:top">${ip(dk2,lbl2)}</td>
-      </tr>
-    </table>`;
+  function wi2(dk1,lbl1,dk2,lbl2){
+    return '<table style="width:100%;border-collapse:collapse"><tr><td style="width:50%;vertical-align:top;padding-right:8pt">'+wi(dk1,lbl1)+'</td><td style="width:50%;vertical-align:top;padding-left:8pt">'+wi(dk2,lbl2)+'</td></tr></table>';
+  }
+  function kpi(items){
+    return '<table style="width:100%;border-collapse:collapse;margin:8pt 0">'
+      +'<tr>'+items.map(it=>'<td style="width:'+(100/items.length)+'%;padding:8pt 10pt;background:#f8fafc;border-left:3pt solid '+it.c+';vertical-align:top"><div style="font-size:18pt;font-weight:bold;color:'+it.c+'">'+it.v+'</div><div style="font-size:9pt;color:#6b7280;margin-top:2pt">'+it.l+'</div></td>').join('')+'</tr>'
+      +'</table>';
   }
 
-  $('rc').innerHTML=`
-  <div class="rcov">
-    <div>
-      <div class="rbadge">Piano degli Spostamenti Casa-Lavoro · PSCL Light</div>
-      <div class="rcomp">${D.nome_azienda||'[Nome Azienda]'}</div>
-      <div class="rtit">Anno ${D.anno}</div>
-      <div class="rmeta">📍 ${D.via}, ${D.cap} ${D.comune}<br>👤 Mobility Manager: <strong>${D.nome_mm||'—'}</strong><br>📅 ${new Date().toLocaleDateString('it-IT')}</div>
-    </div>
-    <div class="rlogo-wrap">
-      <div class="rlogo-box">${D.logo_data?`<img src="${D.logo_data}" alt="logo"/>`:`<span style="color:rgba(255,255,255,.5);font-weight:800;font-size:20px">Ottimo</span>`}</div>
-      <div class="rconf-badge">D.I. 179/2021 conforme</div>
-    </div>
-  </div>
+  const html = '<!DOCTYPE html><html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">'
+  +'<head><meta charset="UTF-8"/><title>PSCL '+(D.nome_azienda||'')+' '+D.anno+'</title>'
+  +'<!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View></w:WordDocument></xml><![endif]-->'
+  +'<style>body{font-family:Calibri,Arial,sans-serif;font-size:11pt;color:#111;margin:2cm 2.5cm;line-height:1.5}'
+  +'h1{font-size:22pt;color:#fff;background:#0f172a;padding:10pt 16pt;margin:20pt 0 10pt}'
+  +'h2{font-size:13pt;color:#f07010;border-left:4pt solid #f07010;padding-left:8pt;margin:16pt 0 6pt}'
+  +'p{font-size:11pt;margin:0 0 8pt;line-height:1.7}'
+  +'table{border-collapse:collapse;width:100%;margin:8pt 0;font-size:10pt}'
+  +'th{background:#2563eb;color:#fff;padding:6pt 8pt;text-align:left;font-size:10pt}'
+  +'th.r,td.r{text-align:right}td{padding:5pt 8pt;border-bottom:1pt solid #e5e7eb}'
+  +'tr.tot td{font-weight:bold;color:#15803d;border-top:2pt solid #86efac;border-bottom:none}'
+  +'.dn{color:#dc2626;font-weight:bold}.up{color:#16a34a;font-weight:bold}'
+  +'img{max-width:100%;display:block}'
+  +'@page{margin:2cm}'
+  +'</style></head><body>'
+  +'<table style="width:100%;background:#0f172a;margin-bottom:20pt"><tr>'
+  +'<td style="padding:24pt 28pt;vertical-align:middle"><p style="font-size:9pt;color:#94a3b8;letter-spacing:2pt;text-transform:uppercase;margin-bottom:6pt">Piano degli Spostamenti Casa-Lavoro · PSCL Light</p><p style="font-size:22pt;font-weight:800;color:#fff;margin-bottom:4pt">'+(D.nome_azienda||'[Azienda]')+'</p><p style="font-size:14pt;color:#93c5fd;margin-bottom:8pt">Anno '+D.anno+'</p><p style="font-size:10.5pt;color:#94a3b8;line-height:1.8">'+D.via+', '+D.cap+' '+D.comune+'<br>Mobility Manager: '+(D.nome_mm||'—')+'<br>'+new Date().toLocaleDateString('it-IT')+'</p></td>'
+  +'<td style="width:160pt;padding:16pt;text-align:center;vertical-align:middle">'+(D.logo_data&&!D.logo_data.startsWith('data:image/svg')?'<img src="'+D.logo_data+'" style="max-width:140pt;max-height:70pt"/>':'')+'<p style="font-size:9pt;font-weight:bold;color:#fff;background:rgba(255,255,255,.15);padding:4pt 8pt;margin-top:8pt">D.I. 179/2021 conforme</p></td>'
+  +'</tr></table>'
+  +'<h1>1 &nbsp; Introduzione</h1>'
+  +'<p>Il presente PSCL è redatto in conformità al <strong>D.I. 179 del 12 maggio 2021</strong>, per l\'anno <strong>'+D.anno+'</strong>. Elaborato dal Mobility Manager <strong>'+(D.nome_mm||'—')+'</strong> per <strong>'+(D.nome_azienda||'—')+'</strong>, sita in <strong>'+D.via+', '+D.cap+' '+D.comune+'</strong>.</p>'
+  +'<h1>2 &nbsp; Parte Informativa e di Analisi</h1>'
+  +'<h2>2.1 Analisi delle Condizioni Strutturali</h2>'
+  +kpi([{v:D.totale||'—',l:'Dipendenti totali',c:'#2563eb'},{v:D.risposte||'—',l:'Risposte questionario',c:'#2563eb'},{v:D.totale&&D.risposte?((D.risposte/D.totale)*100).toFixed(0)+'%':'—',l:'Tasso di risposta',c:'#2563eb'},{v:D.orario_in+'–'+D.orario_out,l:'Orario Lun–Ven',c:'#f07010'}])
+  +'<p>Sede: <strong>'+D.via+', '+D.cap+' '+D.comune+'</strong>. Dipendenti: <strong>'+D.totale+'</strong>, coinvolti: <strong>'+D.analizzati+'</strong>, risposte: <strong>'+D.risposte+'</strong>. Dotazioni: <strong>'+([D.navetta&&'navetta',D.carpooling&&'carpooling',D.tpl_incentivi&&'incentivi TPL',D.bike_work&&'Bike to Work',D.smart_working&&'smart working',D.mensa&&'mensa',D.docce&&'docce'].filter(Boolean).join(', ')||'nessuna')+'</strong>. Posti auto: <strong>'+D.posti_auto+'</strong> · Posti bici: <strong>'+D.posti_bici+'</strong>.</p>'
+  +'<h2>2.2 Analisi dell\'Offerta di Trasporto</h2>'
+  +'<p>Entro 500m: <strong>'+(svcs.join(', ')||'nessun servizio rilevato')+'</strong>.</p>'
+  +wi('img_tpl','Trasporto pubblico + dipendenti')
+  +wi('img_calore','Mappa di calore della mobilità aziendale')
+  +wi('img_ragg_tpl','Raggiungibilità trasporto pubblico locale')
+  +wi('img_ragg_auto','Raggiungibilità auto')
+  +wi('img_ragg_bici','Raggiungibilità bicicletta')
+  +wi('img_ragg_piedi','Raggiungibilità a piedi')
+  +wi('img_piste','Piste ciclabili')
+  +'<h2>2.3 Analisi delle Modalità Abituali di Spostamento</h2>'
+  +kpi([{v:pA+'%',l:'Auto/moto — '+D.n_auto+' persone',c:'#dc2626'},{v:pT+'%',l:'TPL — '+D.n_tpl+' persone',c:'#2563eb'},{v:pM+'%',l:'Attiva — '+D.n_attiva+' persone',c:'#16a34a'},{v:D.prop_pct+'%',l:'Disponibili a cambiare',c:'#f07010'}])
+  +'<p>Distanza media sola andata: <strong>'+D.dist_km+' km</strong>.</p>'
+  +wi2('img_g_sede','Indirizzo sede di destinazione','img_g_mezzo','Mezzo principale casa-lavoro')
+  +wi2('img_g_sharing','Tipo di mezzo in sharing','img_g_tpl','Tipo di trasporto pubblico')
+  +wi2('img_g_alim','Tipo di alimentazione auto','img_g_gruppo','Gruppo di dipendenti')
+  +wi2('img_g_eta','Fascia di età','img_g_genere','Genere di appartenenza')
+  +wi('img_g_giorni','Giorni di lavoro a settimana')
+  +'<h2>2.4 Analisi della Propensione al Cambiamento</h2>'
+  +'<p>Il <strong>'+D.prop_pct+'%</strong> è disponibile a cambiare modalità.</p>'
+  +wi2('img_p_diverso','Può viaggiare in modo diverso?','img_p_remoto','Può lavorare da remoto?')
+  +wi2('img_p_opzione','Quale opzione sarebbe più giusta?','img_p_carpooling','Disponibilità al Carpooling?')
+  +'<h1>3 &nbsp; Parte Progettuale</h1>'
+  +'<h2>3.1 Misure da Implementare nell\'Anno '+aN+'</h2>'
+  +'<p style="background:#f8fafc;border-left:4pt solid #2563eb;padding:8pt 12pt;white-space:pre-wrap">'+(D.misure_text||'[Misure non definite]')+'</p>'
+  +'<h2>3.2 Stima Riduzione Emissioni (Anno '+aN+')</h2>'
+  +'<p>Calcolo secondo <strong>Allegato 4, D.I. 179/2021</strong>. Distanza A/R <strong>'+num('dist_km')*2+' km</strong>, tasso occ. <strong>1,2</strong>, giorni/anno <strong>45</strong>, fattori ISPRA 2022.</p>'
+  +'<table style="background:#f0fdf4;border:1pt solid #86efac"><thead><tr style="background:#16a34a"><th>Procedura</th><th class="r">Utenti/Corse</th><th class="r">CO₂ kg/anno</th><th class="r">NOx kg/anno</th><th class="r">PM10 kg/anno</th></tr></thead><tbody>'
+  +'<tr><td>Proc. 1 — SW / TPL / Mobilità attiva</td><td class="r">'+c.p1.n+'</td><td class="r">'+c.p1.CO2+'</td><td class="r">'+c.p1.NOx+'</td><td class="r">'+c.p1.PM10+'</td></tr>'
+  +'<tr><td>Proc. 2 — Carpooling / Car sharing</td><td class="r">'+c.p2.n+'</td><td class="r">'+c.p2.CO2+'</td><td class="r">'+c.p2.NOx+'</td><td class="r">'+c.p2.PM10+'</td></tr>'
+  +'<tr><td>Proc. 3 — Navetta aziendale (netto)</td><td class="r">'+c.p3.n+'</td><td class="r">'+c.p3.CO2+'</td><td class="r">'+c.p3.NOx+'</td><td class="r">'+c.p3.PM10+'</td></tr>'
+  +'<tr class="tot"><td>TOTALE</td><td class="r">'+c.tot.n+'</td><td class="r">'+c.tot.CO2+'</td><td class="r">'+c.tot.NOx+'</td><td class="r">'+c.tot.PM10+'</td></tr>'
+  +'</tbody></table><p style="font-size:9pt;color:#666;font-style:italic">* Formula: x = (((a/b)×c)×d×e)/1000 — Allegato 4, D.I. 179/2021</p>'
+  +'<h2>3.3 Variazione Modale Attesa (Anno '+aN+')</h2>'
+  +'<table><thead><tr><th>Modalità</th><th class="r">Attuale '+D.anno+'</th><th class="r">Obiettivo '+aN+'</th><th class="r">Δ</th></tr></thead><tbody>'
+  +'<tr><td>Auto / moto</td><td class="r">'+D.n_auto+' ('+pA+'%)</td><td class="r">'+nA2+' ('+pA2+'%)</td><td class="r"><span class="dn">−'+c.tot.n+'</span></td></tr>'
+  +'<tr><td>Trasporto pubblico</td><td class="r">'+D.n_tpl+' ('+pT+'%)</td><td class="r">'+nT2+' ('+pT2+'%)</td><td class="r"><span class="up">+'+num('p1_persone')+'</span></td></tr>'
+  +'<tr><td>Mobilità attiva</td><td class="r">'+D.n_attiva+' ('+pM+'%)</td><td class="r">'+D.n_attiva+' ('+pM+'%)</td><td class="r">—</td></tr>'
+  +'</tbody></table>'
+  +'<h2>3.4 Programma di Implementazione</h2>'+wi('img_gantt','Gantt trimestrale')
+  +'<h1>4 &nbsp; Programma di Monitoraggio</h1>'
+  +'<p>'+(D.monitor_note||'Il monitoraggio verrà effettuato tramite questionario aggiornato nell\'anno '+aN+'.')+'</p>'
+  +'<h1>5 &nbsp; Riferimenti Normativi</h1>'
+  +'<ul style="font-size:11pt;line-height:1.9;padding-left:16pt"><li>Decreto Interministeriale n. 179 del 12 maggio 2021</li><li>Decreto Interdirettoriale n. 209 del 4 agosto 2021</li><li>Linee Guida PSCL (art. 3 comma 5, G.U. n. 124 del 26 maggio 2021)</li><li>Indirizzi operativi per i Mobility Manager d\'Area (24 luglio 2024)</li></ul>'
+  +'<p style="margin-top:24pt;font-size:9pt;color:#999;border-top:1pt solid #e5e7eb;padding-top:6pt">'+(D.nome_azienda||'—')+' · PSCL '+D.anno+' · Ottimo PSCL Generator · '+new Date().toLocaleDateString('it-IT')+'</p>'
+  +'</body></html>';
 
-  <div class="rsh"><div class="rsh-num">1</div><div class="rsh-title">Introduzione</div></div>
-  <div class="rc">
-    <p class="rp">Il presente Piano degli Spostamenti Casa-Lavoro (PSCL) è redatto in conformità al <strong>Decreto Interministeriale n. 179 del 12 maggio 2021</strong> e alle relative Linee Guida, per l'anno <strong>${D.anno}</strong>. Il piano è elaborato dal Mobility Manager <strong>${D.nome_mm||'—'}</strong> per la sede di <strong>${D.nome_azienda||'—'}</strong>, sita in <strong>${D.via}, ${D.cap} ${D.comune}</strong>. Il presente documento rispetta tutti i requisiti minimi previsti dalla normativa vigente.</p>
-  </div>
-
-  <div class="rsh"><div class="rsh-num">2</div><div class="rsh-title">Parte Informativa e di Analisi</div></div>
-  <div class="rc">
-    <div class="rh4">2.1 Analisi delle Condizioni Strutturali</div>
-    <div class="krow">
-      <div class="kpi"><div class="kv">${D.totale||'—'}</div><div class="kl">Dipendenti totali</div></div>
-      <div class="kpi"><div class="kv">${D.risposte||'—'}</div><div class="kl">Risposte questionario</div></div>
-      <div class="kpi"><div class="kv">${D.totale&&D.risposte?((D.risposte/D.totale)*100).toFixed(0):'—'}%</div><div class="kl">Tasso di risposta</div></div>
-      <div class="kpi o"><div class="kv">${D.orario_in}–${D.orario_out}</div><div class="kl">Orario Lun–Ven</div></div>
-    </div>
-    <p class="rp">La sede è ubicata in <strong>${D.via}, ${D.cap} ${D.comune}</strong>. Su <strong>${D.totale}</strong> dipendenti totali, <strong>${D.analizzati}</strong> sono stati coinvolti nell'indagine e <strong>${D.risposte}</strong> hanno risposto al questionario. <strong>Dotazioni attive:</strong> ${[D.navetta&&'navetta privata',D.carpooling&&'piattaforma carpooling',D.tpl_incentivi&&'incentivi TPL',D.bike_work&&'Bike to Work',D.smart_working&&'smart working',D.mensa&&'mensa aziendale',D.docce&&'spogliatoi/docce'].filter(Boolean).join(', ')||'nessuna dotazione specifica attiva'}. Posti auto: <strong>${D.posti_auto}</strong> · Posti bici: <strong>${D.posti_bici}</strong>.</p>
-
-    <div class="rh4">2.2 Analisi dell'Offerta di Trasporto</div>
-    <p class="rp">Entro 500 metri dalla sede sono disponibili: <strong>${svcs.join(', ')||'nessun servizio di rilievo'}</strong>.</p>
-    ${ip('img_tpl','Trasporto pubblico + distribuzione dipendenti')}
-    ${ip('img_calore','Mappa di calore della mobilità aziendale')}
-    ${ip('img_ragg_tpl','Raggiungibilità trasporto pubblico locale')}
-    ${ip('img_ragg_auto','Raggiungibilità auto')}
-    ${ip('img_ragg_bici','Raggiungibilità bicicletta')}
-    ${ip('img_ragg_piedi','Raggiungibilità a piedi')}
-    ${ip('img_piste','Piste ciclabili e ciclopedonali')}
-
-    <div class="rh4">2.3 Analisi delle Modalità Abituali di Spostamento Casa-Lavoro</div>
-    <div class="krow">
-      <div class="kpi r"><div class="kv">${pA}%</div><div class="kl">🚗 Auto/moto<br>${D.n_auto} persone</div></div>
-      <div class="kpi"><div class="kv">${pT}%</div><div class="kl">🚌 Trasporto pubblico<br>${D.n_tpl} persone</div></div>
-      <div class="kpi g"><div class="kv">${pM}%</div><div class="kl">🚲 Mobilità attiva<br>${D.n_attiva} persone</div></div>
-    </div>
-    <p class="rp">La distribuzione modale attuale evidenzia una prevalenza dell'auto privata (<strong>${pA}%</strong>), seguita dal trasporto pubblico (<strong>${pT}%</strong>) e dalla mobilità attiva (<strong>${pM}%</strong>). La distanza media di spostamento (solo andata) degli utenti auto è di <strong>${D.dist_km} km</strong>.</p>
-    ${ip2('img_g_sede','Indirizzo completo della sede di lavoro di destinazione','img_g_mezzo','Mezzo principale della mobilità casa-lavoro')}
-    ${ip2('img_g_sharing','Tipo di mezzo in sharing','img_g_tpl','Tipo di trasporto pubblico utilizzato')}
-    ${ip2('img_g_alimentazione','Tipo di alimentazione dell\'auto','img_g_gruppo','Gruppo di dipendenti')}
-    ${ip2('img_g_eta','Fascia di età','img_g_genere','Genere di appartenenza')}
-    ${ip('img_g_giorni','Giorni di lavoro a settimana')}
-
-    <div class="rh4">2.4 Analisi della Propensione al Cambiamento negli Spostamenti Casa-Lavoro</div>
-    <p class="rp">Il <strong>${D.prop_pct}%</strong> del personale ha dichiarato disponibilità a modificare le proprie abitudini di mobilità verso modalità più sostenibili, evidenziando un potenziale significativo per le misure previste nel presente piano.</p>
-    ${ip2('img_p_diverso','Può viaggiare in modo diverso rispetto alla modalità attuale?','img_p_remoto','Può lavorare da remoto?')}
-    ${ip2('img_p_opzione','Quale di queste opzioni sarebbe più giusta per te?','img_p_carpooling','Saresti disposto a condividere lo spostamento (Carpooling)?')}
-  </div>
-
-  <div class="rsh"><div class="rsh-num">3</div><div class="rsh-title">Parte Progettuale</div></div>
-  <div class="rc">
-    <div class="rh4">3.1 Progettazione delle Misure da Implementare nell'Anno ${aN}</div>
-    <p class="rp">Sulla base dell'analisi condotta e della propensione al cambiamento rilevata (<strong>${D.prop_pct}%</strong>), sono state individuate le seguenti misure per l'anno ${aN}:</p>
-    <div class="mlist">${D.misure_text||'[Misure non ancora definite]'}</div>
-
-    <div class="rh4">3.2 Stima della Riduzione delle Emissioni Inquinanti (Anno ${aN})</div>
-    <p class="rp">In conformità all'<strong>Allegato 4 delle Linee Guida (D.I. 179/2021)</strong>, la stima utilizza i fattori di emissione ISPRA 2022 per autovetture (CO₂: 161,72 g/km · NOx: 0,305 g/km · PM10: 0,031 g/km) e per autobus navetta (CO₂: 717,99 g/km). Le misure coinvolgono complessivamente <strong>${c.tot.n} persone/corse</strong>.</p>
-    <div class="etw">
-      <div class="ett">Cruscotto Impatto Ambientale (PSCL) — Risparmio annuo stimato rispetto all'uso dell'auto privata</div>
-      <table class="et">
-        <thead><tr><th>Procedura</th><th class="r">Utenti/Corse</th><th class="r">CO₂ kg/anno</th><th class="r">NOx kg/anno</th><th class="r">PM10 kg/anno</th></tr></thead>
-        <tbody>
-          <tr><td>Procedura 1 — Smart working / TPL / Mobilità attiva</td><td class="r">${c.p1.n}</td><td class="r">${c.p1.CO2}</td><td class="r">${c.p1.NOx}</td><td class="r">${c.p1.PM10}</td></tr>
-          <tr><td>Procedura 2 — Carpooling / Car sharing</td><td class="r">${c.p2.n}</td><td class="r">${c.p2.CO2}</td><td class="r">${c.p2.NOx}</td><td class="r">${c.p2.PM10}</td></tr>
-          <tr><td>Procedura 3 — Navetta aziendale (netto)</td><td class="r">${c.p3.n}</td><td class="r">${c.p3.CO2}</td><td class="r">${c.p3.NOx}</td><td class="r">${c.p3.PM10}</td></tr>
-          <tr class="tot"><td>TOTALE</td><td class="r">${c.tot.n}</td><td class="r">${c.tot.CO2}</td><td class="r">${c.tot.NOx}</td><td class="r">${c.tot.PM10}</td></tr>
-        </tbody>
-      </table>
-      <div class="en">* Calcolato conformemente all'Allegato 4 delle Linee Guida (D.I. 179/2021) sulla base dei fattori di emissione ISPRA.</div>
-    </div>
-
-    <div class="rh4">3.3 Variazione Modale Attesa (Anno ${aN})</div>
-    <table class="mt">
-      <thead><tr><th>Modalità</th><th class="r">Attuale ${D.anno}</th><th class="r">Obiettivo ${aN}</th><th class="r">Δ</th></tr></thead>
-      <tbody>
-        <tr><td>🚗 Auto / moto</td><td class="r">${D.n_auto} (${pA}%)</td><td class="r">${nA2} (${pA2}%)</td><td class="r"><span class="dn">−${c.tot.n}</span></td></tr>
-        <tr><td>🚌 Trasporto pubblico</td><td class="r">${D.n_tpl} (${pT}%)</td><td class="r">${nT2} (${pT2}%)</td><td class="r"><span class="up">+${num('p1_persone')}</span></td></tr>
-        <tr><td>🚲 Mobilità attiva</td><td class="r">${D.n_attiva} (${pM}%)</td><td class="r">${D.n_attiva} (${pM}%)</td><td class="r" style="color:var(--muted)">—</td></tr>
-      </tbody>
-    </table>
-
-    <div class="rh4">3.4 Programma di Implementazione</div>
-    ${ip('img_gantt','Gantt trimestrale programma di implementazione misure')}
-  </div>
-
-  <div class="rsh"><div class="rsh-num">4</div><div class="rsh-title">Programma di Monitoraggio</div></div>
-  <div class="rc">
-    <p class="rp">${D.monitor_note||`Il monitoraggio verrà effettuato tramite questionario di mobilità aggiornato nell'anno ${aN}. I risultati saranno confrontati con i dati del presente piano per valutare i progressi e aggiornare le misure per l'anno successivo, in conformità alle disposizioni normative vigenti.`}</p>
-  </div>
-
-  <div class="rsh"><div class="rsh-num">5</div><div class="rsh-title">Riferimenti Normativi</div></div>
-  <div class="rc">
-    <ul class="norm-li">
-      <li>Decreto Interministeriale n. 179 del 12 maggio 2021</li>
-      <li>Decreto Interdirettoriale n. 209 del 4 agosto 2021</li>
-      <li>Linee Guida per la redazione e l'implementazione dei PSCL (art. 3 comma 5, G.U. n. 124 del 26 maggio 2021)</li>
-      <li>Indirizzi operativi per le attività dei Mobility Manager d'Area (24 luglio 2024)</li>
-    </ul>
-  </div>
-  <div class="rfoot"><span>${D.nome_azienda||'—'} · PSCL ${D.anno} · Mobility Manager: ${D.nome_mm||'—'}</span><span>Ottimo PSCL Generator · ${new Date().toLocaleDateString('it-IT')}</span></div>`;
+  const uri = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);
+  const a = document.createElement('a');
+  a.href = uri;
+  a.download = 'PSCL_'+(D.nome_azienda||'report').replace(/\s+/g,'_')+'_'+D.anno+'.doc';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
 }
 
-// ── NAVIGATION ────────────────────────────────────────
-function goTo(n){
-  cur=n;
-  const fc=$('form-content'), rv=$('report-view');
+// ═══════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════
+function goTo(n) {
+  cur = n;
+  const isReport = n === STEPS.length - 1;
+  $('fv-wrap').style.display = isReport ? 'none' : 'block';
+  $('rv').style.display = isReport ? 'block' : 'none';
+  if (isReport) { renderReport(); }
+  else { render(n); }
 
-  if(n===STEPS.length-1){
-    fc.style.display='none'; rv.style.display='block';
-    renderReport();
-  } else {
-    fc.style.display='block'; rv.style.display='none';
-    $('form-view').innerHTML=RENDERS[n]();
+  $('sidebar').innerHTML = STEPS.map((l,i) =>
+    '<div class="sitem'+(i===cur?' active':i<cur?' done':'')+'" onclick="goTo('+i+')">'+
+    '<span style="width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.5;flex-shrink:0;display:inline-block"></span> '+l+'</div>'
+  ).join('');
 
-    // bind inputs
-    [['f-company','nome_azienda'],['f-mm','nome_mm'],['f-via','via'],['f-comune','comune'],['f-cap','cap'],
-     ['f-totale','totale'],['f-analiz','analizzati'],['f-risp','risposte'],
-     ['f-orin','orario_in'],['f-orout','orario_out'],
-     ['f-pauto','posti_auto'],['f-pbici','posti_bici'],
-     ['f-nauto','n_auto'],['f-ntpl','n_tpl'],['f-natt','n_attiva'],
-     ['f-dist','dist_km'],['f-misure','misure_text'],['f-monitor','monitor_note'],
-    ].forEach(([id,k])=>bindInput(id,k));
+  $('tbar-t').textContent = STEPS[cur];
+  $('tbar-s').textContent = 'Passaggio '+(cur+1)+' di '+STEPS.length;
 
-    const fa=$('f-anno');if(fa){fa.value=D.anno;fa.addEventListener('input',()=>D.anno=fa.value);}
-    ['navetta','carpooling','tpl_incentivi','bike_work','smart_working','mensa','docce',
-     'stazione','metro','bus','bike_sharing','car_sharing','piste'].forEach(k=>bindYN(k));
-
-    // image slots
-    [['sl-tpl','img_tpl'],['sl-calore','img_calore'],['sl-ragg-tpl','img_ragg_tpl'],
-     ['sl-ragg-auto','img_ragg_auto'],['sl-ragg-bici','img_ragg_bici'],
-     ['sl-ragg-piedi','img_ragg_piedi'],['sl-piste','img_piste'],
-     ['sl-g-sede','img_g_sede'],['sl-g-mezzo','img_g_mezzo'],['sl-g-sharing','img_g_sharing'],
-     ['sl-g-tpl','img_g_tpl'],['sl-g-alim','img_g_alimentazione'],['sl-g-gruppo','img_g_gruppo'],
-     ['sl-g-eta','img_g_eta'],['sl-g-genere','img_g_genere'],['sl-g-giorni','img_g_giorni'],
-     ['sl-p-diverso','img_p_diverso'],['sl-p-remoto','img_p_remoto'],
-     ['sl-p-opzione','img_p_opzione'],['sl-p-carpooling','img_p_carpooling'],
-     ['sl-gantt','img_gantt'],
-    ].forEach(([s,d])=>setupSlot(s,d));
-
-    // modal summary live
-    if(n===4){
-      ['f-nauto','f-ntpl','f-natt'].forEach(id=>{
-        const el=$(id);if(!el)return;
-        el.addEventListener('input',()=>{
-          const t=(num('n_auto')+num('n_tpl')+num('n_attiva'))||1;
-          const ms=$('ms-tot');if(ms)ms.textContent=t;
-          const ma=$('ms-auto');if(ma)ma.textContent=D.n_auto;
-          const mt=$('ms-tpl');if(mt)mt.textContent=D.n_tpl;
-          const mi=$('ms-att');if(mi)mi.textContent=D.n_attiva;
-        });
-      });
-    }
-    if(n===7) updateCalcPreview();
+  const bp=$('bp'), bn=$('bn'), nb=$('nbtns');
+  if (!isReport && bp && bn && nb) {
+    nb.style.display = 'flex';
+    bp.disabled = cur === 0;
+    const last = cur === STEPS.length - 2;
+    bn.textContent = last ? '🚀 Genera PSCL →' : 'Avanti →';
+    bn.className = 'nb ' + (last ? 'gen' : 'next');
   }
-
-  // sidebar
-  $('sidebar-steps').innerHTML=STEPS.map((l,i)=>`
-    <div class="sidebar-item${i===cur?' active':i<cur?' done':''}" onclick="goTo(${i})">
-      <span class="dot"></span>${l}
-    </div>`).join('');
-
-  $('topbar-title').textContent=STEPS[cur];
-  $('topbar-step').textContent=`Passaggio ${cur+1} di ${STEPS.length}`;
-
-  const bp=$('bp'),bn=$('bn'),nb=$('nav-btns');
-  if(bp&&bn&&nb){
-    if(n===STEPS.length-1){nb.style.display='none';}
-    else{nb.style.display='flex';bp.disabled=cur===0;const last=cur===STEPS.length-2;bn.textContent=last?'🚀 Genera PSCL →':'Avanti →';bn.className='nbtn '+(last?'gen':'next');}
-  }
-  window.scrollTo({top:0,behavior:'smooth'});
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
-function nextStep(){if(cur<STEPS.length-1)goTo(cur+1);}
-function prevStep(){if(cur>0)goTo(cur-1);}
+function next() { if (cur < STEPS.length-1) goTo(cur+1); }
+function prev() { if (cur > 0) goTo(cur-1); }
+
 goTo(0);
 </script>
 </body>
