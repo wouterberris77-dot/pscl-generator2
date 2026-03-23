@@ -195,6 +195,7 @@ table.mt td{padding:8px 12px;border-bottom:1px solid var(--border)}
       <div class="ebtns">
         <button class="ebtn back" onclick="goTo(STEPS.length-2)">← Modifica</button>
         <button class="ebtn pdf" onclick="window.print()">🖨️ Stampa / PDF</button>
+        <button class="ebtn word" onclick="exportWord()">📝 Esporta Word</button>
       </div>
     </div>
     <div class="rw" id="rc"></div>
@@ -602,6 +603,50 @@ const RENDERS=[
 </div>`,
 ];
 
+// ── WORD EXPORT ───────────────────────────────────────
+function exportWord(){
+  renderReport();
+  const content = $('rc').innerHTML;
+  const html = `<html xmlns:o='urn:schemas-microsoft-com:office:office'
+    xmlns:w='urn:schemas-microsoft-com:office:word'
+    xmlns='http://www.w3.org/TR/REC-html40'>
+    <head><meta charset='UTF-8'>
+    <style>
+      body{font-family:Calibri,Arial,sans-serif;color:#111;font-size:11pt;margin:2cm}
+      h2,h3{color:#1d4ed8}.rcomp{font-size:22pt;font-weight:bold;color:#fff}
+      .rcov{background:#1d4ed8;color:#fff;padding:20pt 30pt;margin-bottom:16pt}
+      .rsh{background:#1d4ed8;color:#fff;padding:10pt 20pt;margin:16pt 0 8pt}
+      .rsh-title{font-size:14pt;font-weight:bold;color:#fff}
+      .rh4{font-size:11pt;font-weight:bold;color:#f07010;border-left:4pt solid #f07010;padding-left:8pt;margin:14pt 0 6pt}
+      .rc{padding:0 8pt}.rp{font-size:10.5pt;line-height:1.7;margin-bottom:8pt}
+      .krow{display:table;width:100%;margin:10pt 0}
+      .kpi{display:table-cell;padding:8pt 12pt;background:#f1f5f9;border-left:3pt solid #2563eb;width:22%}
+      .kv{font-size:18pt;font-weight:bold;color:#2563eb}.kl{font-size:9pt;color:#666}
+      .kpi.g .kv{color:#16a34a}.kpi.o .kv{color:#f07010}.kpi.r .kv{color:#dc2626}
+      table{border-collapse:collapse;width:100%;font-size:10pt;margin:8pt 0}
+      th{background:#2563eb;color:#fff;padding:6pt 8pt;text-align:left}th.r,td.r{text-align:right}
+      td{padding:5pt 8pt;border-bottom:1pt solid #e5e7eb}
+      tr.tot td{font-weight:bold;border-top:2pt solid #86efac;color:#15803d}
+      .etw{background:#f0fdf4;border:1pt solid #86efac;padding:10pt;margin:8pt 0}
+      .ett{font-weight:bold;color:#15803d;margin-bottom:6pt}
+      .mlist{background:#f8fafc;border-left:3pt solid #2563eb;padding:8pt 12pt;font-size:10.5pt;white-space:pre-wrap;margin:8pt 0}
+      .rfoot{background:#0f172a;color:#aaa;padding:8pt 20pt;font-size:9pt;margin-top:16pt}
+      .img-grid{display:table;width:100%;margin:8pt 0}
+      .img-grid-item{display:table-cell;width:48%;padding:0 4pt;vertical-align:top}
+      .img-cap-report{font-size:10pt;font-weight:bold;border-left:3pt solid #2563eb;padding-left:6pt;margin:10pt 0 4pt;color:#111}
+      img{max-width:100%;height:auto;display:block;margin:4pt 0}
+      .rbadge,.rconf-badge,.rsh-num{display:none}
+      .norm-li{font-size:10.5pt;line-height:1.8;padding-left:14pt}
+      .norm-li li{margin-bottom:3pt}
+      .en{font-size:9pt;color:#4ade80;margin-top:6pt}
+    </style></head><body>${content}</body></html>`;
+  const blob = new Blob(['\ufeff'+html], {type:'application/msword'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `PSCL_${(D.nome_azienda||'report').replace(/\s+/g,'_')}_${D.anno}.doc`;
+  a.click();
+}
+
 // ── REPORT ────────────────────────────────────────────
 function renderReport(){
   const c=calcAll();
@@ -611,9 +656,18 @@ function renderReport(){
   const nA2=Math.max(0,num('n_auto')-c.tot.n), nT2=num('n_tpl')+num('p1_persone');
   const pA2=(nA2/tot*100).toFixed(1), pT2=(nT2/tot*100).toFixed(1);
   const svcs=[D.stazione&&'stazione ferroviaria',D.metro&&'metropolitana',D.bus&&'bus/tram',D.bike_sharing&&'bike sharing',D.car_sharing&&'car sharing',D.piste&&'piste ciclabili'].filter(Boolean);
+
+  // single image with caption
   function ip(dk,lbl){
-    if(D[dk])return`<div style="margin:14px 0;border-radius:10px;overflow:hidden;border:1px solid var(--border)"><img src="${D[dk]}" style="width:100%;display:block"/></div>`;
-    return`<div style="border:2px dashed #c7d2fe;border-radius:10px;background:#f8faff;padding:20px;text-align:center;color:#818cf8;margin:14px 0;font-size:13px">📊 <em>${lbl}</em><br><span style="font-size:11px;color:#a5b4fc">Immagine non caricata</span></div>`;
+    if(D[dk])return`<div><div class="img-cap-report">${lbl}</div><img src="${D[dk]}" style="width:100%;border-radius:8px;border:1px solid var(--border)"/></div>`;
+    return`<div><div class="img-cap-report">${lbl}</div><div style="border:2px dashed #c7d2fe;border-radius:8px;background:#f8faff;padding:16px;text-align:center;color:#818cf8;font-size:12.5px">📊 <em>Immagine non caricata</em></div></div>`;
+  }
+  // pair of images side by side
+  function ip2(dk1,lbl1,dk2,lbl2){
+    return`<div class="img-grid">
+      <div class="img-grid-item">${ip(dk1,lbl1)}</div>
+      <div class="img-grid-item">${ip(dk2,lbl2)}</div>
+    </div>`;
   }
 
   $('rc').innerHTML=`
@@ -648,12 +702,9 @@ function renderReport(){
 
     <div class="rh4">2.2 Analisi dell'Offerta di Trasporto</div>
     <p class="rp">Entro 500 metri dalla sede sono disponibili: <strong>${svcs.join(', ')||'nessun servizio di rilievo'}</strong>.</p>
-    ${ip('img_tpl','Trasporto pubblico + distribuzione dipendenti')}
-    ${ip('img_calore','Mappa di calore della mobilità aziendale')}
-    ${ip('img_ragg_tpl','Raggiungibilità trasporto pubblico locale')}
-    ${ip('img_ragg_auto','Raggiungibilità auto')}
-    ${ip('img_ragg_bici','Raggiungibilità bicicletta')}
-    ${ip('img_ragg_piedi','Raggiungibilità a piedi')}
+    ${ip2('img_tpl','Trasporto pubblico + distribuzione dipendenti','img_calore','Mappa di calore della mobilità aziendale')}
+    ${ip2('img_ragg_tpl','Raggiungibilità trasporto pubblico locale','img_ragg_auto','Raggiungibilità auto')}
+    ${ip2('img_ragg_bici','Raggiungibilità bicicletta','img_ragg_piedi','Raggiungibilità a piedi')}
     ${ip('img_piste','Piste ciclabili e ciclopedonali')}
 
     <div class="rh4">2.3 Analisi delle Modalità Abituali di Spostamento Casa-Lavoro</div>
@@ -663,22 +714,16 @@ function renderReport(){
       <div class="kpi g"><div class="kv">${pM}%</div><div class="kl">🚲 Mobilità attiva<br>${D.n_attiva} persone</div></div>
     </div>
     <p class="rp">La distribuzione modale attuale evidenzia una prevalenza dell'auto privata (<strong>${pA}%</strong>), seguita dal trasporto pubblico (<strong>${pT}%</strong>) e dalla mobilità attiva (<strong>${pM}%</strong>). La distanza media di spostamento (solo andata) degli utenti auto è di <strong>${D.dist_km} km</strong>.</p>
-    ${ip('img_g_sede','Indirizzo completo della sede di lavoro di destinazione')}
-    ${ip('img_g_mezzo','Mezzo principale della mobilità casa-lavoro')}
-    ${ip('img_g_sharing','Tipo di mezzo in sharing')}
-    ${ip('img_g_tpl','Tipo di trasporto pubblico utilizzato')}
-    ${ip('img_g_alimentazione','Tipo di alimentazione dell\'auto')}
-    ${ip('img_g_gruppo','Gruppo di dipendenti')}
-    ${ip('img_g_eta','Fascia di età')}
-    ${ip('img_g_genere','Genere di appartenenza')}
+    ${ip2('img_g_sede','Indirizzo completo della sede di lavoro di destinazione','img_g_mezzo','Mezzo principale della mobilità casa-lavoro')}
+    ${ip2('img_g_sharing','Tipo di mezzo in sharing','img_g_tpl','Tipo di trasporto pubblico utilizzato')}
+    ${ip2('img_g_alimentazione','Tipo di alimentazione dell\'auto','img_g_gruppo','Gruppo di dipendenti')}
+    ${ip2('img_g_eta','Fascia di età','img_g_genere','Genere di appartenenza')}
     ${ip('img_g_giorni','Giorni di lavoro a settimana')}
 
     <div class="rh4">2.4 Analisi della Propensione al Cambiamento negli Spostamenti Casa-Lavoro</div>
     <p class="rp">Il <strong>${D.prop_pct}%</strong> del personale ha dichiarato disponibilità a modificare le proprie abitudini di mobilità verso modalità più sostenibili, evidenziando un potenziale significativo per le misure previste nel presente piano.</p>
-    ${ip('img_p_diverso','Può viaggiare in modo diverso rispetto alla modalità attuale?')}
-    ${ip('img_p_remoto','Può lavorare da remoto?')}
-    ${ip('img_p_opzione','Quale di queste opzioni sarebbe più giusta per te?')}
-    ${ip('img_p_carpooling','Saresti disposto a condividere lo spostamento (Carpooling)?')}
+    ${ip2('img_p_diverso','Può viaggiare in modo diverso rispetto alla modalità attuale?','img_p_remoto','Può lavorare da remoto?')}
+    ${ip2('img_p_opzione','Quale di queste opzioni sarebbe più giusta per te?','img_p_carpooling','Saresti disposto a condividere lo spostamento (Carpooling)?')}
   </div>
 
   <div class="rsh"><div class="rsh-num">3</div><div class="rsh-title">Parte Progettuale</div></div>
