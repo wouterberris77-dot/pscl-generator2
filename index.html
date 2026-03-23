@@ -454,12 +454,14 @@ const RENDERS=[
 <div class="card">
   <div class="card-title">🗺️ Mappe da Ottimo Survey</div>
   <div class="card-sub">Vai in Ottimo Survey → Mappa della mobilità → fai screenshot → carica qui. Le immagini appariranno nel report finale.</div>
-  ${isl('sl-tpl','img_tpl','Trasporto pubblico + dipendenti','Ottimo Survey → Mappa della mobilità → Trasporto pubblico')}
-  ${isl('sl-calore','img_calore','Mappa di calore della mobilità aziendale','Ottimo Survey → Mappa della mobilità → Mappa di calore')}
-  ${isl('sl-ragg-tpl','img_ragg_tpl','Raggiungibilità trasporto pubblico locale','Ottimo Survey → Mappa della mobilità → Raggiungibilità TPL')}
-  ${isl('sl-ragg-auto','img_ragg_auto','Raggiungibilità auto','Ottimo Survey → Mappa della mobilità → Raggiungibilità auto')}
-  ${isl('sl-ragg-bici','img_ragg_bici','Raggiungibilità bicicletta','Ottimo Survey → Mappa della mobilità → Raggiungibilità bicicletta')}
-  ${isl('sl-ragg-piedi','img_ragg_piedi','Raggiungibilità a piedi','Ottimo Survey → Mappa della mobilità → Raggiungibilità a piedi')}
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+    ${isl('sl-tpl','img_tpl','Trasporto pubblico + dipendenti','Ottimo Survey → Mappa della mobilità → Trasporto pubblico')}
+    ${isl('sl-calore','img_calore','Mappa di calore della mobilità aziendale','Ottimo Survey → Mappa della mobilità → Mappa di calore')}
+    ${isl('sl-ragg-tpl','img_ragg_tpl','Raggiungibilità trasporto pubblico locale','Ottimo Survey → Mappa della mobilità → Raggiungibilità TPL')}
+    ${isl('sl-ragg-auto','img_ragg_auto','Raggiungibilità auto','Ottimo Survey → Mappa della mobilità → Raggiungibilità auto')}
+    ${isl('sl-ragg-bici','img_ragg_bici','Raggiungibilità bicicletta','Ottimo Survey → Mappa della mobilità → Raggiungibilità bicicletta')}
+    ${isl('sl-ragg-piedi','img_ragg_piedi','Raggiungibilità a piedi','Ottimo Survey → Mappa della mobilità → Raggiungibilità a piedi')}
+  </div>
   ${isl('sl-piste','img_piste','Piste ciclabili','Ottimo Survey → Mappa della mobilità → Piste ciclabili')}
 </div>`,
 
@@ -488,14 +490,16 @@ const RENDERS=[
 <div class="card">
   <div class="card-title">📊 Grafici del questionario — da Ottimo Survey</div>
   <div class="card-sub">Vai in Ottimo Survey → Dashboard → Grafici del questionario → scarica o screenshot → carica qui.</div>
-  ${isl('sl-g-sede','img_g_sede','Indirizzo completo della sede di lavoro di destinazione','Ottimo Survey → Dashboard → Grafici questionario')}
-  ${isl('sl-g-mezzo','img_g_mezzo','Mezzo principale della mobilità casa-lavoro','Ottimo Survey → Dashboard → Grafici questionario')}
-  ${isl('sl-g-sharing','img_g_sharing','Tipo di mezzo in sharing','Ottimo Survey → Dashboard → Grafici questionario')}
-  ${isl('sl-g-tpl','img_g_tpl','Tipo di trasporto pubblico utilizzato','Ottimo Survey → Dashboard → Grafici questionario')}
-  ${isl('sl-g-alim','img_g_alimentazione','Tipo di alimentazione dell\'auto','Ottimo Survey → Dashboard → Grafici questionario')}
-  ${isl('sl-g-gruppo','img_g_gruppo','Gruppo di dipendenti','Ottimo Survey → Dashboard → Grafici questionario')}
-  ${isl('sl-g-eta','img_g_eta','Fascia di età','Ottimo Survey → Dashboard → Grafici questionario')}
-  ${isl('sl-g-genere','img_g_genere','Genere di appartenenza','Ottimo Survey → Dashboard → Grafici questionario')}
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+    ${isl('sl-g-sede','img_g_sede','Indirizzo completo della sede di lavoro','Ottimo Survey → Dashboard → Grafici questionario')}
+    ${isl('sl-g-mezzo','img_g_mezzo','Mezzo principale della mobilità casa-lavoro','Ottimo Survey → Dashboard → Grafici questionario')}
+    ${isl('sl-g-sharing','img_g_sharing','Tipo di mezzo in sharing','Ottimo Survey → Dashboard → Grafici questionario')}
+    ${isl('sl-g-tpl','img_g_tpl','Tipo di trasporto pubblico utilizzato','Ottimo Survey → Dashboard → Grafici questionario')}
+    ${isl('sl-g-alim','img_g_alimentazione','Tipo di alimentazione dell\'auto','Ottimo Survey → Dashboard → Grafici questionario')}
+    ${isl('sl-g-gruppo','img_g_gruppo','Gruppo di dipendenti','Ottimo Survey → Dashboard → Grafici questionario')}
+    ${isl('sl-g-eta','img_g_eta','Fascia di età','Ottimo Survey → Dashboard → Grafici questionario')}
+    ${isl('sl-g-genere','img_g_genere','Genere di appartenenza','Ottimo Survey → Dashboard → Grafici questionario')}
+  </div>
   ${isl('sl-g-giorni','img_g_giorni','Giorni di lavoro a settimana','Ottimo Survey → Dashboard → Grafici questionario')}
 </div>`,
 
@@ -516,10 +520,12 @@ const RENDERS=[
 <div class="card">
   <div class="card-title">📊 Grafici propensione — da Ottimo Survey</div>
   <div class="card-sub">Vai in Ottimo Survey → Dashboard → Grafici del questionario (sezione propensione) → carica qui.</div>
-  ${isl('sl-p-diverso','img_p_diverso','Può viaggiare in modo diverso rispetto alla modalità attuale?','Ottimo Survey → Dashboard → Propensione')}
-  ${isl('sl-p-remoto','img_p_remoto','Può lavorare da remoto?','Ottimo Survey → Dashboard → Propensione')}
-  ${isl('sl-p-opzione','img_p_opzione','Quale di queste opzioni sarebbe più giusta per te?','Ottimo Survey → Dashboard → Propensione')}
-  ${isl('sl-p-carpooling','img_p_carpooling','Saresti disposto a condividere lo spostamento in auto con i tuoi colleghi (Carpooling)?','Ottimo Survey → Dashboard → Propensione')}
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+    ${isl('sl-p-diverso','img_p_diverso','Può viaggiare in modo diverso rispetto alla modalità attuale?','Ottimo Survey → Dashboard → Propensione')}
+    ${isl('sl-p-remoto','img_p_remoto','Può lavorare da remoto?','Ottimo Survey → Dashboard → Propensione')}
+    ${isl('sl-p-opzione','img_p_opzione','Quale di queste opzioni sarebbe più giusta per te?','Ottimo Survey → Dashboard → Propensione')}
+    ${isl('sl-p-carpooling','img_p_carpooling','Saresti disposto a condividere lo spostamento (Carpooling)?','Ottimo Survey → Dashboard → Propensione')}
+  </div>
 </div>`,
 
 // 6: Misure
@@ -610,63 +616,46 @@ function exportHTML(){
   renderReport();
   const content = $('rc').innerHTML;
   const html = `<!DOCTYPE html>
-<html lang="it">
-<head>
-<meta charset="UTF-8"/>
+<html lang="it"><head><meta charset="UTF-8"/>
 <title>PSCL ${D.nome_azienda||'report'} ${D.anno}</title>
 <style>
-  body{font-family:'Segoe UI',Calibri,Arial,sans-serif;color:#111;font-size:11pt;margin:0;padding:0;background:#fff}
-  .rcov{background:linear-gradient(135deg,#0f172a,#1d4ed8 55%,#00b4a0);color:#fff;padding:40px 52px 32px;display:grid;grid-template-columns:1fr 180px;gap:24px;align-items:center}
-  .rbadge{background:rgba(255,255,255,.2);border-radius:5px;padding:3px 12px;font-size:10px;letter-spacing:2px;text-transform:uppercase;display:inline-block;margin-bottom:12px}
-  .rcomp{font-size:28px;font-weight:800;margin-bottom:6px}
-  .rtit{font-size:16px;opacity:.85;margin-bottom:10px}
-  .rmeta{font-size:12px;opacity:.7;line-height:1.9}
-  .rlogo-wrap{display:flex;flex-direction:column;align-items:center;gap:8px}
-  .rlogo-box{width:150px;height:84px;background:rgba(255,255,255,.12);border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid rgba(255,255,255,.2)}
-  .rlogo-box img{max-width:140px;max-height:78px;object-fit:contain}
-  .rconf-badge{background:rgba(255,255,255,.15);border-radius:6px;padding:5px 12px;font-size:11px;font-weight:700;text-align:center;color:#fff;width:100%}
-  .rsh{background:linear-gradient(90deg,#0f172a,#1d4ed8 60%,#00b4a0);padding:14px 52px;display:flex;align-items:center;gap:14px}
-  .rsh-num{font-size:30px;font-weight:800;color:rgba(255,255,255,.25)}
-  .rsh-title{font-size:15px;font-weight:700;color:#fff}
-  .rc{padding:24px 52px}
-  .rh4{font-size:13px;font-weight:700;color:#f07010;margin:20px 0 7px;border-left:4px solid #f07010;padding-left:9px}
-  .rp{font-size:12.5px;line-height:1.85;margin-bottom:10px}
-  .rp strong{color:#1e3a8a}
-  .krow{display:flex;gap:12px;margin:14px 0;flex-wrap:wrap}
-  .kpi{flex:1;min-width:110px;background:#f8fafc;border-radius:9px;padding:12px 14px;border-left:4px solid #2563eb}
-  .kv{font-size:22px;font-weight:800;color:#2563eb;line-height:1}
-  .kl{font-size:11px;color:#6b7280;margin-top:3px;line-height:1.4}
-  .kpi.g{border-color:#16a34a}.kpi.g .kv{color:#16a34a}
-  .kpi.o{border-color:#f07010}.kpi.o .kv{color:#f07010}
-  .kpi.r{border-color:#dc2626}.kpi.r .kv{color:#dc2626}
-  .etw{background:#f0fdf4;border:1.5px solid #86efac;border-radius:10px;padding:14px;margin:12px 0}
-  .ett{font-weight:700;color:#15803d;margin-bottom:8px;font-size:13px}
-  table{width:100%;border-collapse:collapse;font-size:12px;margin:8px 0}
-  th{background:#2563eb;color:#fff;padding:6px 10px;text-align:left;font-size:11px}
-  th.r,td.r{text-align:right}
-  td{padding:6px 10px;border-bottom:1px solid #e5e7eb}
-  tr.tot td{font-weight:700;color:#15803d;border-top:2px solid #86efac;border-bottom:none}
-  .en{font-size:11px;color:#15803d;margin-top:6px}
-  table.mt th{background:#2563eb}
-  .dn{color:#dc2626;font-weight:700}.up{color:#16a34a;font-weight:700}
-  .mlist{background:#f8fafc;border-radius:9px;padding:14px 18px;font-size:12.5px;line-height:1.9;white-space:pre-wrap;border-left:4px solid #2563eb;margin:10px 0}
-  .norm-li{font-size:12.5px;line-height:1.9;padding-left:18px}
-  .norm-li li{margin-bottom:2px}
-  .rfoot{background:#0f172a;color:rgba(255,255,255,.45);padding:14px 52px;font-size:11px;display:flex;justify-content:space-between}
-  .img-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
-  .img-grid-item{}
-  .img-cap-report{font-size:12px;font-weight:700;color:#1e3a8a;border-left:3px solid #2563eb;padding-left:7px;margin:14px 0 5px}
-  img{max-width:100%;height:auto;display:block;border-radius:7px;border:1px solid #e5e7eb}
-  @media print{
-    .rcov,.rsh{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  }
-</style>
-</head>
-<body>${content}</body>
-</html>`;
-  const blob = new Blob([html], {type:'text/html;charset=utf-8'});
+body{font-family:'Segoe UI',Arial,sans-serif;color:#111;font-size:11pt;margin:0;padding:0;background:#fff}
+.rcov{background:linear-gradient(135deg,#0f172a,#1d4ed8 55%,#00b4a0);color:#fff;padding:40px 52px 32px;display:grid;grid-template-columns:1fr 180px;gap:24px;align-items:center}
+.rbadge{background:rgba(255,255,255,.2);border-radius:5px;padding:3px 12px;font-size:10px;letter-spacing:2px;text-transform:uppercase;display:inline-block;margin-bottom:12px}
+.rcomp{font-size:28px;font-weight:800;margin-bottom:6px}.rtit{font-size:16px;opacity:.85;margin-bottom:10px}.rmeta{font-size:12px;opacity:.7;line-height:1.9}
+.rlogo-wrap{display:flex;flex-direction:column;align-items:center;gap:8px}
+.rlogo-box{width:150px;height:84px;background:rgba(255,255,255,.12);border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.rlogo-box img{max-width:140px;max-height:78px;object-fit:contain}
+.rconf-badge{background:rgba(255,255,255,.15);border-radius:6px;padding:5px 12px;font-size:11px;font-weight:700;text-align:center;color:#fff;width:100%}
+.rsh{background:linear-gradient(90deg,#0f172a,#1d4ed8 60%,#00b4a0);padding:14px 52px;display:flex;align-items:center;gap:14px}
+.rsh-num{font-size:30px;font-weight:800;color:rgba(255,255,255,.25)}.rsh-title{font-size:15px;font-weight:700;color:#fff}
+.rc{padding:24px 52px}
+.rh4{font-size:13px;font-weight:700;color:#f07010;margin:20px 0 7px;border-left:4px solid #f07010;padding-left:9px}
+.rp{font-size:12.5px;line-height:1.85;margin-bottom:10px}.rp strong{color:#1e3a8a}
+.krow{display:flex;gap:12px;margin:14px 0;flex-wrap:wrap}
+.kpi{flex:1;min-width:110px;background:#f8fafc;border-radius:9px;padding:12px 14px;border-left:4px solid #2563eb}
+.kv{font-size:22px;font-weight:800;color:#2563eb;line-height:1}.kl{font-size:11px;color:#6b7280;margin-top:3px;line-height:1.4}
+.kpi.g{border-color:#16a34a}.kpi.g .kv{color:#16a34a}.kpi.o{border-color:#f07010}.kpi.o .kv{color:#f07010}.kpi.r{border-color:#dc2626}.kpi.r .kv{color:#dc2626}
+.etw{background:#f0fdf4;border:1.5px solid #86efac;border-radius:10px;padding:14px;margin:12px 0}
+.ett{font-weight:700;color:#15803d;margin-bottom:8px;font-size:13px}
+table{width:100%;border-collapse:collapse;font-size:12px;margin:8px 0}
+th{background:#2563eb;color:#fff;padding:6px 10px;text-align:left;font-size:11px}
+th.r,td.r{text-align:right}td{padding:6px 10px;border-bottom:1px solid #e5e7eb}
+tr.tot td{font-weight:700;color:#15803d;border-top:2px solid #86efac;border-bottom:none}
+.en{font-size:11px;color:#15803d;margin-top:6px}
+.dn{color:#dc2626;font-weight:700}.up{color:#16a34a;font-weight:700}
+.mlist{background:#f8fafc;border-radius:9px;padding:14px 18px;font-size:12.5px;line-height:1.9;white-space:pre-wrap;border-left:4px solid #2563eb;margin:10px 0}
+.norm-li{font-size:12.5px;line-height:1.9;padding-left:18px}.norm-li li{margin-bottom:2px}
+.rfoot{background:#0f172a;color:rgba(255,255,255,.45);padding:14px 52px;font-size:11px;display:flex;justify-content:space-between}
+.img-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.img-cap-report{font-size:12px;font-weight:700;color:#1e3a8a;border-left:3px solid #2563eb;padding-left:7px;margin:14px 0 5px}
+img{max-width:100%;height:auto;display:block;border-radius:7px;border:1px solid #e5e7eb}
+@media print{.rcov,.rsh{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style></head><body>${content}</body></html>`;
+  // Use data URI instead of blob — works in all browsers including Edge
+  const dataUri = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
   const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
+  a.href = dataUri;
   a.download = `PSCL_${(D.nome_azienda||'report').replace(/\s+/g,'_')}_${D.anno}.html`;
   a.click();
 }
