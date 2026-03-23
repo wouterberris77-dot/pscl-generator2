@@ -454,14 +454,12 @@ const RENDERS=[
 <div class="card">
   <div class="card-title">🗺️ Mappe da Ottimo Survey</div>
   <div class="card-sub">Vai in Ottimo Survey → Mappa della mobilità → fai screenshot → carica qui. Le immagini appariranno nel report finale.</div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-    ${isl('sl-tpl','img_tpl','Trasporto pubblico + dipendenti','Ottimo Survey → Mappa della mobilità → Trasporto pubblico')}
-    ${isl('sl-calore','img_calore','Mappa di calore della mobilità aziendale','Ottimo Survey → Mappa della mobilità → Mappa di calore')}
-    ${isl('sl-ragg-tpl','img_ragg_tpl','Raggiungibilità trasporto pubblico locale','Ottimo Survey → Mappa della mobilità → Raggiungibilità TPL')}
-    ${isl('sl-ragg-auto','img_ragg_auto','Raggiungibilità auto','Ottimo Survey → Mappa della mobilità → Raggiungibilità auto')}
-    ${isl('sl-ragg-bici','img_ragg_bici','Raggiungibilità bicicletta','Ottimo Survey → Mappa della mobilità → Raggiungibilità bicicletta')}
-    ${isl('sl-ragg-piedi','img_ragg_piedi','Raggiungibilità a piedi','Ottimo Survey → Mappa della mobilità → Raggiungibilità a piedi')}
-  </div>
+  ${isl('sl-tpl','img_tpl','Trasporto pubblico + dipendenti','Ottimo Survey → Mappa della mobilità → Trasporto pubblico')}
+  ${isl('sl-calore','img_calore','Mappa di calore della mobilità aziendale','Ottimo Survey → Mappa della mobilità → Mappa di calore')}
+  ${isl('sl-ragg-tpl','img_ragg_tpl','Raggiungibilità trasporto pubblico locale','Ottimo Survey → Mappa della mobilità → Raggiungibilità TPL')}
+  ${isl('sl-ragg-auto','img_ragg_auto','Raggiungibilità auto','Ottimo Survey → Mappa della mobilità → Raggiungibilità auto')}
+  ${isl('sl-ragg-bici','img_ragg_bici','Raggiungibilità bicicletta','Ottimo Survey → Mappa della mobilità → Raggiungibilità bicicletta')}
+  ${isl('sl-ragg-piedi','img_ragg_piedi','Raggiungibilità a piedi','Ottimo Survey → Mappa della mobilità → Raggiungibilità a piedi')}
   ${isl('sl-piste','img_piste','Piste ciclabili','Ottimo Survey → Mappa della mobilità → Piste ciclabili')}
 </div>`,
 
@@ -759,9 +757,12 @@ function renderReport(){
 
     <div class="rh4">2.2 Analisi dell'Offerta di Trasporto</div>
     <p class="rp">Entro 500 metri dalla sede sono disponibili: <strong>${svcs.join(', ')||'nessun servizio di rilievo'}</strong>.</p>
-    ${ip2('img_tpl','Trasporto pubblico + distribuzione dipendenti','img_calore','Mappa di calore della mobilità aziendale')}
-    ${ip2('img_ragg_tpl','Raggiungibilità trasporto pubblico locale','img_ragg_auto','Raggiungibilità auto')}
-    ${ip2('img_ragg_bici','Raggiungibilità bicicletta','img_ragg_piedi','Raggiungibilità a piedi')}
+    ${ip('img_tpl','Trasporto pubblico + distribuzione dipendenti')}
+    ${ip('img_calore','Mappa di calore della mobilità aziendale')}
+    ${ip('img_ragg_tpl','Raggiungibilità trasporto pubblico locale')}
+    ${ip('img_ragg_auto','Raggiungibilità auto')}
+    ${ip('img_ragg_bici','Raggiungibilità bicicletta')}
+    ${ip('img_ragg_piedi','Raggiungibilità a piedi')}
     ${ip('img_piste','Piste ciclabili e ciclopedonali')}
 
     <div class="rh4">2.3 Analisi delle Modalità Abituali di Spostamento Casa-Lavoro</div>
