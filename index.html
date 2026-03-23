@@ -718,12 +718,14 @@ function renderReport(){
     if(D[dk])return`<div><div class="img-cap-report">${lbl}</div><img src="${D[dk]}" style="width:100%;border-radius:8px;border:1px solid var(--border)"/></div>`;
     return`<div><div class="img-cap-report">${lbl}</div><div style="border:2px dashed #c7d2fe;border-radius:8px;background:#f8faff;padding:16px;text-align:center;color:#818cf8;font-size:12.5px">📊 <em>Immagine non caricata</em></div></div>`;
   }
-  // pair of images side by side
+  // grafici 2 per riga
   function ip2(dk1,lbl1,dk2,lbl2){
-    return`<div class="img-grid">
-      <div class="img-grid-item">${ip(dk1,lbl1)}</div>
-      <div class="img-grid-item">${ip(dk2,lbl2)}</div>
-    </div>`;
+    return `<table style="width:100%;border-collapse:collapse;margin:4px 0">
+      <tr>
+        <td style="width:50%;padding-right:10px;vertical-align:top">${ip(dk1,lbl1)}</td>
+        <td style="width:50%;padding-left:10px;vertical-align:top">${ip(dk2,lbl2)}</td>
+      </tr>
+    </table>`;
   }
 
   $('rc').innerHTML=`
